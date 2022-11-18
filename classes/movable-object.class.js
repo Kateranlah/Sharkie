@@ -15,7 +15,7 @@ class MovableObject{
     }
 
     drawHitbox(ctx){
-        if(this.instanceof Character || this.instanceof Jellyfish ){
+        if(this instanceof Character || this instanceof Jellyfish ){
         ctx.beginPath();
         ctx.lineWidth= '3';
         ctx.strokeStyle= 'blue';
