@@ -52,11 +52,16 @@ class Character extends MovableObject {
        
         }
         if (this.world.keyboard.RIGHT) {
+           
+            this.otherDirection = false;
           this.x += this.speed;
+          console.log(this.otherDirection);
 
         }
         if (this.world.keyboard.LEFT) {
-          this.x -= this.speed;
+            this.otherDirection = true;
+            this.x -= this.speed;
+            console.log(this.otherDirection);
 
         }
       }, 1000 / 60);
