@@ -35,12 +35,13 @@ class Character extends MovableObject {
     super().loadImage("img/1.Sharkie/1.IDLE/1.png");
     this.loadImages(this.IMAGES_SWIM);
 
+   
     this.animate();
   }
 
   async animate() {
-    setInterval(() => {
-     
+    setInterval(() => { 
+       
         if (this.world.keyboard.UP) {
           this.y -= this.speed / 3;
 
@@ -52,16 +53,18 @@ class Character extends MovableObject {
        
         }
         if (this.world.keyboard.RIGHT) {
-           
             this.otherDirection = false;
           this.x += this.speed;
-          console.log(this.otherDirection);
+          this.world.camera_x = -this.x;
+          
+      
 
         }
         if (this.world.keyboard.LEFT) {
             this.otherDirection = true;
             this.x -= this.speed;
-            console.log(this.otherDirection);
+            this.world.camera_x = -this.x;
+
 
         }
       }, 1000 / 60);

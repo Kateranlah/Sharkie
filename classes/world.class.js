@@ -16,6 +16,7 @@ class World{
        new BackgroundObject('img/3. Background/Layers/2. Floor/L1.png', 0)
     ]
     keyboard;
+    camera_x = 0;
     
 
 
@@ -38,7 +39,8 @@ class World{
 
     draw(){
         this.ctx.clearRect(0 , 0, this.canvas.width, this.canvas.height)
-    
+
+        this.ctx.translate(this.camera_x, 0);    
         this.addObjectsToMap(this.backgroundObjects)        
         this.addObjectsToMap(this.lights)
         this.addToMap(this.character);
@@ -46,7 +48,7 @@ class World{
     
     
         this.addObjectsToMap(this.enemies)
-   
+        this.ctx.translate(-this.camera_x, 0);   
 
         self = this;
         requestAnimationFrame(function() {self.draw();});
@@ -64,7 +66,7 @@ class World{
             this.ctx.save();
             this.ctx.translate(mo.width, 0)
             this.ctx.scale( -1, 1);
-            mo.x = mo.x * -1;
+            mo.x = (mo.x) * -1;
         }
         this.ctx.drawImage(
                 mo.img,
@@ -73,7 +75,7 @@ class World{
                 mo.width,
                 mo.height)
        if (mo.otherDirection) {
-        mo.x = mo.x * -1;
+        mo.x = (mo.x)* -1;
         this.ctx.restore();
         
     }         
