@@ -2,7 +2,7 @@ class Character extends MovableObject {
   height = 200;
   width = 200;
   world;
-  speed = 20;
+  speed = 4;
   IMAGES_IDLE = [
     "img/1.Sharkie/1.IDLE/1.png",
     "img/1.Sharkie/1.IDLE/2.png",
@@ -41,36 +41,37 @@ class Character extends MovableObject {
   async animate() {
     setInterval(() => {
      
-      if (this.world.keyboard.UP) {
-        this.y -= this.speed / 3;
-        let i = this.currentImage % this.IMAGES_SWIM.length;
-        let path = this.IMAGES_SWIM[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
-      
-      }
-      if (this.world.keyboard.DOWN) {
-        this.y += this.speed / 3;
-        let i = this.currentImage % this.IMAGES_SWIM.length;
-        let path = this.IMAGES_SWIM[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
+        if (this.world.keyboard.UP) {
+          this.y -= this.speed / 3;
+
+        
+        }
+        if (this.world.keyboard.DOWN) {
+          this.y += this.speed / 3;
+
+       
+        }
+        if (this.world.keyboard.RIGHT) {
+          this.x += this.speed;
+
+        }
+        if (this.world.keyboard.LEFT) {
+          this.x -= this.speed;
+
+        }
+      }, 1000 / 60);
+
+
+    setInterval(() => {
      
-      }
-      if (this.world.keyboard.RIGHT) {
-        this.x += this.speed;
-        let i = this.currentImage % this.IMAGES_SWIM.length;
-        let path = this.IMAGES_SWIM[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
-      }
-      if (this.world.keyboard.LEFT) {
-        this.x -= this.speed;
-        let i = this.currentImage % this.IMAGES_SWIM.length;
-        let path = this.IMAGES_SWIM[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
-      }
-    }, 90);
+        if (this.world.keyboard.UP || this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+          let i = this.currentImage % this.IMAGES_SWIM.length;
+          let path = this.IMAGES_SWIM[i];
+          this.img = this.imageCache[path];
+          this.currentImage++;
+        
+        }
+        
+      }, 150);
   }
 }
