@@ -7,35 +7,64 @@ class World{
      ];
     canvas;
     ctx;
-    lights = new Light();
-    backgroundObject = [ 
-        new BackgroundObject('img/3. Background/Layers/5. Water/L1.png')
+    lights = [new Light()]
+    backgroundObjects = [ 
+        new BackgroundObject('img/3. Background/Layers/5. Water/L1.png', 0),
+        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/L1.png', 0),
+        
+        new BackgroundObject('img/3. Background/Layers/4.Fondo 2/L1.png', 0),
+       new BackgroundObject('img/3. Background/Layers/2. Floor/L1.png', 0)
     ]
+    keyboard;
+    
 
 
 
-
-
-    constructor(canvas){
+    constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas
+        this.keyboard = keyboard;
         this.draw();
+        this.setWorld();
+    
 
+    }
+
+    setWorld(){
+       
+        this.character.world = this;
+       
     }
 
     draw(){
         this.ctx.clearRect(0 , 0, this.canvas.width, this.canvas.height)
-        this.ctx.drawImage(this.character.img, this.character.x, this.character.y, this.character.witdh, this.character.height)
-        this.enemies.forEach(enemy => {
-            this.ctx.drawImage(enemy.img, enemy.x, enemy.y, enemy.witdh, enemy.height)
-            
-        });
-        this.ctx.drawImage(this.lights.img, this.lights.x, this.lights.y, this.lights.witdh, this.lights.height)
+    
+        this.addObjectsToMap(this.backgroundObjects)        
+        this.addObjectsToMap(this.lights)
+        this.addToMap(this.character);
+     
+    
+    
+        this.addObjectsToMap(this.enemies)
+   
+
         self = this;
         requestAnimationFrame(function() {self.draw();});
     }
 
+    addObjectsToMap(objects){
+        objects.forEach(o => {
+            this.addToMap(o)
+        });
+
+    }
+
     addToMap(mo){
-this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height)
+        this.ctx.drawImage(
+                mo.img,
+                mo.x, 
+                mo.y, 
+                mo.width,
+                mo.height)
     }
 }
