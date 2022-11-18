@@ -3,6 +3,7 @@ class Character extends MovableObject {
   width = 200;
   world;
   speed = 4;
+  speed = 30;
   IMAGES_IDLE = [
     "img/1.Sharkie/1.IDLE/1.png",
     "img/1.Sharkie/1.IDLE/2.png",
@@ -52,18 +53,18 @@ class Character extends MovableObject {
 
        
         }
-        if (this.world.keyboard.RIGHT) {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.otherDirection = false;
           this.x += this.speed;
-          this.world.camera_x = -this.x;
+          this.world.camera_x = -this.x + 200;
           
       
 
         }
-        if (this.world.keyboard.LEFT) {
+        if (this.world.keyboard.LEFT && this.x > 0) {
             this.otherDirection = true;
             this.x -= this.speed;
-            this.world.camera_x = -this.x;
+            this.world.camera_x = -this.x + 200;
 
 
         }
