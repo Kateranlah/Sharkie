@@ -42,31 +42,21 @@ class Character extends MovableObject {
 
   async animate() {
     setInterval(() => { 
+   
        
-        if (this.world.keyboard.UP) {
-          this.y -= this.speed / 3;
-
+        if (this.world.keyboard.UP && this.y > -80) {
+            this.moveUp();
+        }
+        if (this.world.keyboard.DOWN && this.y < 300) {
+            this.moveDown();
+    
+        }
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) 
+        {this.moveRight();
         
         }
-        if (this.world.keyboard.DOWN) {
-          this.y += this.speed / 3;
-
-       
-        }
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-            this.otherDirection = false;
-          this.x += this.speed;
-          this.world.camera_x = -this.x + 200;
-          
-      
-
-        }
         if (this.world.keyboard.LEFT && this.x > 0) {
-            this.otherDirection = true;
-            this.x -= this.speed;
-            this.world.camera_x = -this.x + 200;
-
-
+            this.moveLeft();
         }
       }, 1000 / 60);
 
