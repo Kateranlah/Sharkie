@@ -30,10 +30,10 @@ class MovableObject{
         ctx.lineWidth= '3';
         ctx.strokeStyle= 'blue';
         ctx.rect(
-            this.x +65, 
-            this.y +90, 
+            this.x + 60, 
+            this.y + 100, 
             this.width -100,
-            this.height -  200);
+            this.height -150);
         ctx.stroke();}
     }
 
@@ -41,17 +41,14 @@ class MovableObject{
 
         isColliding (obj) {
 
-console.log(this.y + this.offset.right);
-console.log(obj.y + obj.height);
-                   return  (this.x + 65 + this.width - 170) >= obj.x 
-                    	&& this.x <= (obj.x + obj.width)
-                         && (this.y + this.height) >= obj.y 
-                         &&(this.y + this.offset.right) <= (obj.y + obj.height) 
-                      
-                
 
+                   return  ((this.x + 60 ) + (this.width - 100 )) >= (obj.x +60)
+                    	&& (this.x + 60) <= ((obj.x+60) + (obj.width - 100))
+                         && ((this.y + 100 ) + (this.height -150)) >= (obj.y +100) 
+                         &&((this.y + 100 )) <= ((obj.y +100) + (obj.height - 150))
     }
     
+
 
     loadImage(path){
         this.img = new Image();
