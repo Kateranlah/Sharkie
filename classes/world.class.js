@@ -6,6 +6,7 @@ class World {
   keyboard;
   camera_x = 0;
   healthBar = new HealthBar();
+  bubbles = []
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -13,24 +14,42 @@ class World {
     this.keyboard = keyboard;
     this.draw();
     this.setWorld();
-    this.checkCollisions();
+    this.run();
   }
 
   setWorld() {
     this.character.world = this;
   }
 
-  checkCollisions() {
+  run(){
     setInterval(() => {
+        this.checkCollisions();
+        this.checkMakeBubble();
+    },200);
+
+  }
+
+  checkMakeBubble(){
+    if (this.keyboard.E) {
+        let bubble = new StandartBubble(this.character.x +180, this.character.y + 100)
+        this.bubbles.push(bubble);
+        
+    }
+  }
+
+
+  checkCollisions() {
+   
       this.level.enemies.forEach((enemy) => {
         if (this.character.isColliding(enemy)) {
           this.character.hit();
           this.healthBar.setPercentage(this.character.energy);
-          console.log(this.character.energy);
+    
         }
-      });
-    }, 200);
-  }
+   
+  })
+}
+  
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -40,6 +59,7 @@ class World {
     this.addObjectsToMap(this.level.lights);
     this.addToMap(this.character);
 
+    this.addObjectsToMap(this.bubbles)
     this.ctx.translate(-this.camera_x, 0);
     // ------------- Space for fixed objects ------------- //
     this.addToMap(this.healthBar);
@@ -47,6 +67,7 @@ class World {
     this.ctx.translate(this.camera_x, 0);
 
     this.addObjectsToMap(this.level.enemies);
+
     this.ctx.translate(-this.camera_x, 0);
 
     self = this;
