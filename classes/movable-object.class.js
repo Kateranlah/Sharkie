@@ -9,6 +9,7 @@ class MovableObject{
     speed = 0.15;
     otherDirection = false;
     energy = 100;
+    lastHit = 0;
 
     constructor(){
        
@@ -94,9 +95,23 @@ class MovableObject{
       this.energy -= 5;
       if(this.energy < 0){
         this.energy = 0
+      }else{
+this.lastHit = new Date().getTime();
       }
       
-      console.log( this.energy);
+  
+      }
+
+      isDead(){
+    return this.energy == 0;
+      }
+
+      isHurt(){
+       
+        let timepassed = new Date().getTime() - this.lastHit;
+        timepassed = timepassed / 1000; // from ms to s
+        return timepassed < 1
+        
       }
    
 }
