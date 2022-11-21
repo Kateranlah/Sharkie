@@ -3,6 +3,12 @@ class Endboss extends MovableObject {
   width = 600;
   speed = 0.15;
   firstAppearance = 0
+  offset = {
+    top: 0,
+    bottom:0,
+    right: 00,
+    left: 0
+}
   IMAGES_INTRODUCE = [
     "img/2.Enemy/3 Final Enemy/1.Introduce/1.png",
     "img/2.Enemy/3 Final Enemy/1.Introduce/2.png",
@@ -62,7 +68,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_ATTACK);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
-    this.x = 100
+    this.x = 900
     this.y = 0
     this.animate();
   }

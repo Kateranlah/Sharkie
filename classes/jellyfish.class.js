@@ -3,6 +3,11 @@ class Jellyfish extends MovableObject{
 height = 120;
 width = 70;
 speed = 0.15;
+offset = {
+  top: 70,
+  bottom: 70,
+  right: 50,
+  left: 50}
 IMAGES_MOVING_YELLOW = ['img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png',
 'img/2.Enemy/2 Jelly fish/Regular damage/Yellow 2.png',
 'img/2.Enemy/2 Jelly fish/Regular damage/Yellow 3.png',

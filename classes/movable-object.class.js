@@ -14,20 +14,7 @@ class MovableObject{
         
     }
 
-    drawHitbox(ctx){
-        if(this instanceof Character || this instanceof Jellyfish ){
-        ctx.beginPath();
-        ctx.lineWidth= '3';
-        ctx.strokeStyle= 'blue';
-        ctx.rect(
-            this.x +65, 
-            this.y +90, 
-            this.width -100,
-            this.height -140);
-        ctx.stroke();}
-    }
-
-   
+     
         draw(ctx){
             ctx.drawImage(
                 this.img,
@@ -36,6 +23,34 @@ class MovableObject{
                 this.width,
                 this.height)
         }
+
+    drawHitbox(ctx){
+        if(this instanceof Character || this instanceof Jellyfish || this instanceof Endboss){
+        ctx.beginPath();
+        ctx.lineWidth= '3';
+        ctx.strokeStyle= 'blue';
+        ctx.rect(
+            this.x +65, 
+            this.y +90, 
+            this.width -100,
+            this.height -  200);
+        ctx.stroke();}
+    }
+
+  
+
+        isColliding (obj) {
+
+console.log(this.y + this.offset.right);
+console.log(obj.y + obj.height);
+                   return  (this.x + 65 + this.width - 170) >= obj.x 
+                    	&& this.x <= (obj.x + obj.width)
+                         && (this.y + this.height) >= obj.y 
+                         &&(this.y + this.offset.right) <= (obj.y + obj.height) 
+                      
+                
+
+    }
     
 
     loadImage(path){

@@ -3,7 +3,14 @@ class Character extends MovableObject {
   width = 200;
   world;
   speed = 4;
-  speed = 30;
+  offset = {
+    top: 200,
+    bottom: 0,
+    right: 0,
+    left: 0
+}
+
+
   IMAGES_IDLE = [
     "img/1.Sharkie/1.IDLE/1.png",
     "img/1.Sharkie/1.IDLE/2.png",
@@ -44,7 +51,7 @@ class Character extends MovableObject {
     setInterval(() => { 
    
        
-        if (this.world.keyboard.UP && this.y > -80) {
+        if (this.world.keyboard.UP && this.y > 0) {
             this.moveUp();
         }
         if (this.world.keyboard.DOWN && this.y < 300) {

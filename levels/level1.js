@@ -1,7 +1,8 @@
 
 
 const level1 = new Level(
-  [new Jellyfish(), new Jellyfish(), new Jellyfish(), new Endboss],
+   [//new Jellyfish(), new Jellyfish(), new Jellyfish(),
+    new Endboss],
   [new Light()],
   [
 
