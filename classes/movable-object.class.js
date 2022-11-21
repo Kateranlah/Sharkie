@@ -89,4 +89,14 @@ class MovableObject{
         this.currentImage++;
       }
 
+
+     hit(){
+      this.energy -= 5;
+      if(this.energy < 0){
+        this.energy = 0
+      }
+      
+      console.log( this.energy);
+      }
+   
 }
