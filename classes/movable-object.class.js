@@ -1,43 +1,18 @@
-class MovableObject{
-    x = 200;
-    y = 40;
-    img;
-    height = 100;
-    width = 150;
-    imageCache = {};
-    currentImage = 0;
+class MovableObject extends DrawableObject{
     speed = 0.15;
     otherDirection = false;
     energy = 100;
     lastHit = 0;
 
     constructor(){
-       
+       super();
         
     }
 
      
-        draw(ctx){
-            ctx.drawImage(
-                this.img,
-                this.x, 
-                this.y, 
-                this.width,
-                this.height)
-        }
+        
 
-    drawHitbox(ctx){
-        if(this instanceof Character || this instanceof Jellyfish || this instanceof Endboss){
-        ctx.beginPath();
-        ctx.lineWidth= '3';
-        ctx.strokeStyle= 'blue';
-        ctx.rect(
-            this.x + 60, 
-            this.y + 100, 
-            this.width -100,
-            this.height -150);
-        ctx.stroke();}
-    }
+   
 
   
 
@@ -52,19 +27,8 @@ class MovableObject{
     
 
 
-    loadImage(path){
-        this.img = new Image();
-        this.img.src = path;
 
-    }
-
-    loadImages(arr){
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
-    }
+    
 
     moveUp(){
         this.y -= this.speed;

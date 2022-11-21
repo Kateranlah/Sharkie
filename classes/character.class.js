@@ -97,7 +97,6 @@ class Character extends MovableObject {
       if(this.isDead()){
         this.playAnimation(this.IMAGES_DIE_POISEN);
       } else if(this.isHurt()) {
-        console.log('aua');
         this.playAnimation(this.IMAGES_HURT_POISEN);
       }
       else
