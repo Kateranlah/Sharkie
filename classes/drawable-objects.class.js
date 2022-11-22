@@ -40,10 +40,10 @@ class DrawableObject{
         ctx.lineWidth= '3';
         ctx.strokeStyle= 'blue';
         ctx.rect(
-            this.x, 
-            this.y, 
-            this.width,
-            this.height);
+            this.x + this.offset.x, 
+            this.y + this.offset.y, 
+            this.width + this.offset.width,
+            this.height + this.offset.height);
         ctx.stroke();}
     }
 }

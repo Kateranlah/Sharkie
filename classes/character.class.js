@@ -76,10 +76,10 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
-        if (this.world.keyboard.UP && this.y > 0) {
+        if (this.world.keyboard.UP && this.y + this.offset.y > 0) {
             this.moveUp();
         }
-        if (this.world.keyboard.DOWN && this.y < 300) {
+        if (this.world.keyboard.DOWN && this.y < 480 + this.offset.height*1.5) {
             this.moveDown();
     
         }
