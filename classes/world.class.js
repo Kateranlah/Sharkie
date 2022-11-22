@@ -28,6 +28,7 @@ class World {
     setInterval(() => {
         this.checkCollisions();
         this.checkMakeBubble();
+        this.checkCollect();
     },200);
 
   }
@@ -42,8 +43,8 @@ class World {
 
 checkCollect(){
   this.level.coins.forEach((coin) => {
+    console.log(this.character.isColliding(coin));
     if (this.character.isColliding(coin)) {
-      console.log('meins');
       this.character.collect();
     //  this.healthBar.setPercentage(this.character.energy);
     }

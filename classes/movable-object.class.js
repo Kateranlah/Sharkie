@@ -9,11 +9,12 @@ class MovableObject extends DrawableObject {
   }
 
   isColliding(obj) {
+   
     return (
-      this.x + 60 + (this.width - 100) >= obj.x + 60 &&
-      this.x + 60 <= obj.x + 60 + (obj.width - 100) &&
-      this.y + 100 + (this.height - 150) >= obj.y + 100 &&
-      this.y + 100 <= obj.y + 100 + (obj.height - 150)
+      this.x + this.offset.x + (this.width + this.offset.width) >= obj.x + obj.offset.x &&
+      this.x + this.offset.x <= obj.x + obj.offset.x + (obj.width + obj.offset.width) &&
+      this.y + this.offset.y + (this.height + this.offset.height) >= obj.y + obj.offset.y &&
+      this.y + this.offset.y <= obj.y + obj.offset.y + (obj.height + obj.offset.height)
     );
   }
 
@@ -51,7 +52,7 @@ class MovableObject extends DrawableObject {
   }
 
   collect(){
-    
+    console.log();
   }
 
   isDead() {

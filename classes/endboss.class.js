@@ -4,10 +4,10 @@ class Endboss extends MovableObject {
   speed = 0.15;
   firstAppearance = 0
   offset = {
-    top: 0,
-    bottom:0,
-    right: 00,
-    left: 0
+    x : 60,
+    y :100,
+    width: -100,
+    height: -150
 }
   IMAGES_INTRODUCE = [
     "img/2.Enemy/3 Final Enemy/1.Introduce/1.png",
