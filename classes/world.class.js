@@ -6,6 +6,8 @@ class World {
   keyboard;
   camera_x = 0;
   healthBar = new HealthBar();
+  poisenBar = new PoisenBar();
+  coinBar = new CoinBar();
   bubbles = []
 
   constructor(canvas, keyboard) {
@@ -63,6 +65,8 @@ class World {
     this.ctx.translate(-this.camera_x, 0);
     // ------------- Space for fixed objects ------------- //
     this.addToMap(this.healthBar);
+    this.addToMap(this.poisenBar);
+    this.addToMap(this.coinBar);
     // ------------- Space for fixed objects ends ------------- //
     this.ctx.translate(this.camera_x, 0);
 
