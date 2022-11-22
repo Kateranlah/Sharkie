@@ -73,7 +73,7 @@ class Character extends MovableObject {
     this.animate();
   }
 
-  async animate() {
+  animate() {
     setInterval(() => {
         if (this.world.keyboard.UP && this.y > 0) {
             this.moveUp();

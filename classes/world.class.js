@@ -10,6 +10,7 @@ class World {
   coinBar = new CoinBar();
   bubbles = []
 
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -60,7 +61,6 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.lights);
     this.addToMap(this.character);
-
     this.addObjectsToMap(this.bubbles)
     this.ctx.translate(-this.camera_x, 0);
     // ------------- Space for fixed objects ------------- //
@@ -71,6 +71,8 @@ class World {
     this.ctx.translate(this.camera_x, 0);
 
     this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.poisen);
+    this.addObjectsToMap(this.level.coins);
 
     this.ctx.translate(-this.camera_x, 0);
 
