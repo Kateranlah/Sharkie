@@ -43,12 +43,13 @@ class World {
 
 checkCollect(){
   this.level.coins.forEach((coin) => {
-    console.log(this.character.isColliding(coin));
     if (this.character.isColliding(coin)) {
-      this.character.collect();
+      this.character.collect(coin);
     //  this.healthBar.setPercentage(this.character.energy);
     }
   })
+
+  
 
 }
 

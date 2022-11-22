@@ -4,6 +4,7 @@ class MovableObject extends DrawableObject {
   energy = 100;
   lastHit = 0;
 
+
   constructor() {
     super();
   }
@@ -51,8 +52,22 @@ class MovableObject extends DrawableObject {
     }
   }
 
-  collect(){
-    console.log();
+  collect(coin){
+   
+    let i = 0
+    world.level.coins.forEach(element => {
+      if (element == coin){
+    world.level.coins.splice(i, 1)
+    world.character.coinsCollected ++
+    console.log(world.character.coinsCollected);
+    i++
+      }else{
+        i++
+      }
+    });
+
+
+
   }
 
   isDead() {
