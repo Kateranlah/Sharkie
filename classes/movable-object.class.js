@@ -50,6 +50,10 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  collect(){
+    
+  }
+
   isDead() {
     return this.energy == 0;
   }

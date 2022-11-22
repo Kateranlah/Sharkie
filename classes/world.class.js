@@ -40,6 +40,16 @@ class World {
     }
   }
 
+checkCollect(){
+  this.level.coins.forEach((coin) => {
+    if (this.character.isColliding(coin)) {
+      console.log('meins');
+      this.character.collect();
+    //  this.healthBar.setPercentage(this.character.energy);
+    }
+  })
+
+}
 
   checkCollisions() {
    
