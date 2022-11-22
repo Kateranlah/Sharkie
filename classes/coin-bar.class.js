@@ -8,7 +8,7 @@ class CoinBar extends StatusBar{
     "img/4. Marcadores/orange/80_  copia 2.png",
     "img/4. Marcadores/orange/100_ copia 2.png"]
 
-percentage = 100;
+percentage = 0;
 
     constructor(){
         super();

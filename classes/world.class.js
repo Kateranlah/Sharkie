@@ -45,7 +45,7 @@ checkCollect(){
   this.level.coins.forEach((coin) => {
     if (this.character.isColliding(coin)) {
       this.character.collect(coin);
-    //  this.healthBar.setPercentage(this.character.energy);
+     this.coinBar.setPercentage(this.character.coinsCollected, true);
     }
   })
 
