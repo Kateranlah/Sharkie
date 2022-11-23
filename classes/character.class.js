@@ -7,6 +7,7 @@ class Character extends MovableObject {
   poisenCollected = 0
   alive = 0
   idled = 0
+  slapping = false
   lastMove = new Date().getTime();
   sleep = false
   offset = {
@@ -43,6 +44,16 @@ IMAGES_SLEEP = [
   "img/1.Sharkie/2.Long_IDLE/i14.png"
 
 ];
+
+IMAGES_SLAP = [
+  "img/1.Sharkie/4.Attack/Fin slap/1.png",
+  "img/1.Sharkie/4.Attack/Fin slap/4.png",
+  "img/1.Sharkie/4.Attack/Fin slap/5.png",
+  "img/1.Sharkie/4.Attack/Fin slap/6.png",
+  "img/1.Sharkie/4.Attack/Fin slap/7.png",
+  "img/1.Sharkie/4.Attack/Fin slap/8.png",
+];
+
 
 
   IMAGES_IDLE = [
@@ -101,6 +112,7 @@ IMAGES_SLEEP = [
     this.loadImages(this.IMAGES_IDLE);
     this.loadImages(this.IMAGES_SWIM);
     this.loadImages(this.IMAGES_DIE_POISEN);
+    this.loadImages(this.IMAGES_SLAP);
     this.loadImages(this.IMAGES_HURT_POISEN);
     this.loadImages(this.IMAGES_LONG_IDLE);
 
@@ -117,22 +129,30 @@ IMAGES_SLEEP = [
             this.sleep = false
             
         }
+
+       
+        this.lastMove = new Date().getTime();
         if (this.world.keyboard.DOWN && this.y < 480 + this.offset.height) {
             this.moveDown();
             this.setLastMove()
-            this.sleep = false
+        
         }
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) 
         {this.moveRight();
           this.setLastMove()
-          this.sleep = false
-        
+     
         }
         if (this.world.keyboard.LEFT && this.x > 0) {
             this.moveLeft();
             this.setLastMove()
-            this.sleep = false
-        }}
+         
+        }
+      
+        if (this.world.keyboard.SPACE) {
+          this.slap()
+          this.setLastMove()
+
+      }}
       }, 1000 / 60);
 
 
@@ -154,6 +174,9 @@ IMAGES_SLEEP = [
       else
         if (this.world.keyboard.UP || this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
           this.playAnimation(this.IMAGES_SWIM);
+        }else   
+        if (this.world.keyboard.SPACE) {
+          this.playAnimation(this.IMAGES_SLAP);
         }else   
         
         if(this.sleep && this.idled == this.IMAGES_LONG_IDLE.length ){
@@ -177,16 +200,24 @@ IMAGES_SLEEP = [
   }
 
 
-  
+ slap() {
+     this.slapping = true;
+     setTimeout(() => {
+      this.slapping = false;
+    }, 500)
+ }
+
+
+
   isLongIdle() {
     let timePassed = new Date().getTime() - this.lastMove; 
     timePassed = timePassed / 1000; 
-    console.log(timePassed);
     return timePassed;
 }
 
 setLastMove(){
   this.lastMove = new Date().getTime();
+  this.sleep = false
 }
 
 
