@@ -12,8 +12,8 @@ class Poisen extends Collectables{
 
     constructor(){
         super().loadImages(this.IMAGES)
-        this.x = 30;
-        this.y = 100;
+        this.x += 200 + Math.random() * 1500;
+        this.y = 380;
         this.animate(this.IMAGES);
     }
 
