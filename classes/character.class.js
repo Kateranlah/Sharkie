@@ -6,12 +6,43 @@ class Character extends MovableObject {
   coinsCollected = 0
   poisenCollected = 0
   alive = 0
+  idled = 0
+  lastMove = new Date().getTime();
+  sleep = false
   offset = {
     x : 60,
     y : 100,
     width: -100,
     height: -150,
+    
 }
+
+IMAGES_LONG_IDLE = [
+  "img/1.Sharkie/2.Long_IDLE/i1.png",
+  "img/1.Sharkie/2.Long_IDLE/i2.png",
+  "img/1.Sharkie/2.Long_IDLE/i3.png",
+  "img/1.Sharkie/2.Long_IDLE/i4.png",
+  "img/1.Sharkie/2.Long_IDLE/i5.png",
+  "img/1.Sharkie/2.Long_IDLE/i6.png",
+  "img/1.Sharkie/2.Long_IDLE/i7.png",
+  "img/1.Sharkie/2.Long_IDLE/i8.png",
+  "img/1.Sharkie/2.Long_IDLE/i9.png",
+  "img/1.Sharkie/2.Long_IDLE/i10.png",
+  "img/1.Sharkie/2.Long_IDLE/i11.png",
+  "img/1.Sharkie/2.Long_IDLE/i12.png",
+  "img/1.Sharkie/2.Long_IDLE/i13.png",
+  "img/1.Sharkie/2.Long_IDLE/i14.png"
+
+];
+
+IMAGES_SLEEP = [
+
+  "img/1.Sharkie/2.Long_IDLE/i11.png",
+  "img/1.Sharkie/2.Long_IDLE/i12.png",
+  "img/1.Sharkie/2.Long_IDLE/i13.png",
+  "img/1.Sharkie/2.Long_IDLE/i14.png"
+
+];
 
 
   IMAGES_IDLE = [
@@ -71,6 +102,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_SWIM);
     this.loadImages(this.IMAGES_DIE_POISEN);
     this.loadImages(this.IMAGES_HURT_POISEN);
+    this.loadImages(this.IMAGES_LONG_IDLE);
 
    
     this.animate();
@@ -81,17 +113,25 @@ class Character extends MovableObject {
       if(!this.isDead()){
         if (this.world.keyboard.UP && this.y + this.offset.y > 0) {
             this.moveUp();
+            this.setLastMove()
+            this.sleep = false
+            
         }
         if (this.world.keyboard.DOWN && this.y < 480 + this.offset.height) {
             this.moveDown();
-    
+            this.setLastMove()
+            this.sleep = false
         }
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) 
         {this.moveRight();
+          this.setLastMove()
+          this.sleep = false
         
         }
         if (this.world.keyboard.LEFT && this.x > 0) {
             this.moveLeft();
+            this.setLastMove()
+            this.sleep = false
         }}
       }, 1000 / 60);
 
@@ -103,9 +143,8 @@ class Character extends MovableObject {
           
           this.playAnimation(this.IMAGES_DIE_POISEN); 
           this.alive++
-        }else{
-          return
         }
+        
 
    
         
@@ -115,13 +154,40 @@ class Character extends MovableObject {
       else
         if (this.world.keyboard.UP || this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
           this.playAnimation(this.IMAGES_SWIM);
-        }else{
+        }else   
+        
+        if(this.sleep && this.idled == this.IMAGES_LONG_IDLE.length ){
+          this.playAnimation(this.IMAGES_SLEEP);
+        }else
+        
+        
+        
+        if(this.isLongIdle() >= 10){
+          this.playAnimation(this.IMAGES_LONG_IDLE);
+          this.idled++
+          this.sleep = true
+        }else 
+      
+        {
+        
           this.playAnimation(this.IMAGES_IDLE);
         }
         
       }, 150);
   }
 
+
+  
+  isLongIdle() {
+    let timePassed = new Date().getTime() - this.lastMove; 
+    timePassed = timePassed / 1000; 
+    console.log(timePassed);
+    return timePassed;
+}
+
+setLastMove(){
+  this.lastMove = new Date().getTime();
+}
 
 
 }
