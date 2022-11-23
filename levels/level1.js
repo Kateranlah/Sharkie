@@ -7,6 +7,8 @@ const level1 = new Level(
   ],
   [//new Poisen()
   ],
+    [new Hearts()
+   ],
   [new Light()],
   [
     new BackgroundObject("img/3. Background/Layers/5. Water/L2.png", -719),

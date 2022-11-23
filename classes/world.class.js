@@ -5,11 +5,11 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
+  collectables = new Collectables();
   healthBar = new HealthBar();
   poisenBar = new PoisenBar();
   coinBar = new CoinBar();
-  bubbles = []
-
+  bubbles = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -24,47 +24,51 @@ class World {
     this.character.world = this;
   }
 
-  run(){
+  run() {
     setInterval(() => {
-        this.checkCollisions();
-        this.checkMakeBubble();
-        this.checkCollect();
-    },200);
-
+      this.checkCollisions();
+      this.checkMakeBubble();
+      this.checkCollectCoins();
+      this.checkCollectHearts();
+    }, 200);
   }
 
-  checkMakeBubble(){
+  checkMakeBubble() {
     if (this.keyboard.E) {
-        let bubble = new StandartBubble(this.character.x +180, this.character.y + 100)
-        this.bubbles.push(bubble);
-        
+      let bubble = new StandartBubble(
+        this.character.x + 180,
+        this.character.y + 100
+      );
+      this.bubbles.push(bubble);
     }
   }
 
-checkCollect(){
-  this.level.coins.forEach((coin) => {
-    if (this.character.isColliding(coin)) {
-      this.character.collect(coin);
-     this.coinBar.setPercentage(this.character.coinsCollected, true);
-    }
-  })
+  checkCollectCoins() {
+    this.level.coins.forEach((coin) => {
+      if (this.character.isColliding(coin)) {
+        this.collectables.collect(coin);
+        this.coinBar.setPercentage(this.character.coinsCollected, true);
+      }
+    });
+  }
 
-  
-
-}
+  checkCollectHearts() {
+    this.level.hearts.forEach((heart) => {
+      if (this.character.isColliding(heart)) {
+      this.collectables.heal();
+      this.healthBar.setPercentage(this.character.energy);
+      }
+    });
+  }
 
   checkCollisions() {
-   
-      this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
-          this.character.hit();
-          this.healthBar.setPercentage(this.character.energy);
-    
-        }
-   
-  })
-}
-  
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        this.character.hit();
+        this.healthBar.setPercentage(this.character.energy);
+      }
+    });
+  }
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -73,20 +77,26 @@ checkCollect(){
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.lights);
     this.addToMap(this.character);
-    this.addObjectsToMap(this.bubbles)
+    this.addObjectsToMap(this.bubbles);
+  
+
+    this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.poisen);
+    this.addObjectsToMap(this.level.coins);
+    this.addObjectsToMap(this.level.hearts);
+
     this.ctx.translate(-this.camera_x, 0);
+
+
+
+
+   
     // ------------- Space for fixed objects ------------- //
     this.addToMap(this.healthBar);
     this.addToMap(this.poisenBar);
     this.addToMap(this.coinBar);
     // ------------- Space for fixed objects ends ------------- //
-    this.ctx.translate(this.camera_x, 0);
-
-    this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.level.poisen);
-    this.addObjectsToMap(this.level.coins);
-
-    this.ctx.translate(-this.camera_x, 0);
+  
 
     self = this;
     requestAnimationFrame(function () {

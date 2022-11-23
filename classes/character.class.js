@@ -79,7 +79,7 @@ class Character extends MovableObject {
         if (this.world.keyboard.UP && this.y + this.offset.y > 0) {
             this.moveUp();
         }
-        if (this.world.keyboard.DOWN && this.y < 480 + this.offset.height*1.5) {
+        if (this.world.keyboard.DOWN && this.y < 480 + this.offset.height) {
             this.moveDown();
     
         }

@@ -37,10 +37,13 @@ class MovableObject extends DrawableObject {
   }
 
   playAnimation(images) {
+  
     let i = this.currentImage % images.length;
     let path = images[i];
     this.img = this.imageCache[path];
     this.currentImage++;
+   
+  
   }
 
   hit() {
@@ -52,23 +55,7 @@ class MovableObject extends DrawableObject {
     }
   }
 
-  collect(coin){
-   
-    let i = 0
-    world.level.coins.forEach(element => {
-      if (element == coin){
-    world.level.coins.splice(i, 1)
-    world.character.coinsCollected ++
-    console.log(world.character.coinsCollected);
-    i++
-      }else{
-        i++
-      }
-    });
-
-
-
-  }
+ 
 
   isDead() {
     return this.energy == 0;
