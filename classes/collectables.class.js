@@ -19,16 +19,31 @@ class Collectables extends MovableObject {
     }, 200);
   }
 
-  collect(coin) {
+  collect(item) {
+    console.log("item", item);
     let i = 0;
-    world.level.coins.forEach((element) => {
-      if (element == coin) {
-        world.level.coins.splice(i, 1);
+    world.level.collectables.forEach((element) => {
+        
+        console.log(item, element);
+      if (element instanceof Coin && element == item ) {
+        world.level.collectables.splice(i, 1);
         world.character.coinsCollected++;
         i++;
-      } else {
-        i++;
-      }
+       }
+        else
+        if (element instanceof Hearts && element == item ){
+            this.heal();
+            world.level.collectables.splice(i, 1);
+            i++;
+        }
+        else
+        if (element instanceof Poisen && element == item ){
+          
+            world.level.collectables.splice(i, 1);
+            i++;
+        }else{
+            i++;
+        }
     });
   }
 
@@ -37,6 +52,6 @@ class Collectables extends MovableObject {
     if (world.character.energy > 100) {
       world.character.energy = 100;
     }
-    world.level.hearts.splice(0, 1);
+  
   }
 }

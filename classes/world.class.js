@@ -28,8 +28,8 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkMakeBubble();
-      this.checkCollectCoins();
-      this.checkCollectHearts();
+      this.checkCollect();
+
     }, 200);
   }
 
@@ -43,23 +43,23 @@ class World {
     }
   }
 
-  checkCollectCoins() {
-    this.level.coins.forEach((coin) => {
-      if (this.character.isColliding(coin)) {
-        this.collectables.collect(coin);
-        this.coinBar.setPercentage(this.character.coinsCollected, true);
+  checkCollect() {
+    this.level.collectables.forEach((item) => {
+      if (this.character.isColliding(item)) {
+        this.collectables.collect(item);
+        // this.coinBar.setPercentage(this.character.coinsCollected, true);
       }
     });
   }
 
-  checkCollectHearts() {
-    this.level.hearts.forEach((heart) => {
-      if (this.character.isColliding(heart)) {
-      this.collectables.heal();
-      this.healthBar.setPercentage(this.character.energy);
-      }
-    });
-  }
+  // checkCollectHearts() {
+  //   this.level.hearts.forEach((heart) => {
+  //     if (this.character.isColliding(heart)) {
+  //     this.collectables.heal();
+  //     this.healthBar.setPercentage(this.character.energy);
+  //     }
+  //   });
+  // }
 
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
@@ -81,9 +81,8 @@ class World {
   
 
     this.addObjectsToMap(this.level.enemies);
-    this.addObjectsToMap(this.level.poisen);
-    this.addObjectsToMap(this.level.coins);
-    this.addObjectsToMap(this.level.hearts);
+    this.addObjectsToMap(this.level.collectables);
+  
 
     this.ctx.translate(-this.camera_x, 0);
 
