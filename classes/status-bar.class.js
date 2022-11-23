@@ -7,10 +7,10 @@ class StatusBar extends DrawableObject{
     constructor(){
 super();
     }
-    resolveImageIndex(coin, poisen){
+    resolveImageIndex(type, poisen){
        
-        if(coin){this.percentage *= 10}
-        if(poisen){this.percentage*10}
+        if(type == 'coin'){this.percentage *= 10}
+        if(type == 'poisen'){this.percentage*=25}
 
         if(this.percentage == 100){
             return 5;
@@ -29,9 +29,10 @@ super();
         }
     }
 
-    setPercentage(percentage, coin){
+    setPercentage(percentage, type){
+       
         this.percentage = percentage
-        let path = this.IMAGES[this.resolveImageIndex(coin)]
+        let path = this.IMAGES[this.resolveImageIndex(type)]
 
         this.img =this.imageCache[path];
      

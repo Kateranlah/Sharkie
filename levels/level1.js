@@ -4,7 +4,7 @@ const level1 = new Level(
   [new Jellyfish(), new Jellyfish(), new Jellyfish(),
     new Endboss],
   [
-    new Poisen(), new Poisen(), new Poisen(), 
+    new Poisen(), new Poisen(), new Poisen(), new Poisen(),
     new Hearts(),
     new Coin(), new Coin(),new Coin(), new Coin(), new Coin(),
     new Coin(), new Coin(), new Coin(),new Coin(), new Coin()

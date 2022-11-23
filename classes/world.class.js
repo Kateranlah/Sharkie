@@ -47,7 +47,6 @@ class World {
     this.level.collectables.forEach((item) => {
       if (this.character.isColliding(item)) {
         this.collectables.collect(item);
-        // this.coinBar.setPercentage(this.character.coinsCollected, true);
       }
     });
   }
