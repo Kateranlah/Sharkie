@@ -5,6 +5,7 @@ class Character extends MovableObject {
   speed = 4;
   coinsCollected = 0
   poisenCollected = 0
+  alive = 0
   offset = {
     x : 60,
     y : 100,
@@ -77,6 +78,7 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
+      if(!this.isDead()){
         if (this.world.keyboard.UP && this.y + this.offset.y > 0) {
             this.moveUp();
         }
@@ -90,14 +92,23 @@ class Character extends MovableObject {
         }
         if (this.world.keyboard.LEFT && this.x > 0) {
             this.moveLeft();
-        }
+        }}
       }, 1000 / 60);
 
 
     setInterval(() => {
      
       if(this.isDead()){
-        this.playAnimation(this.IMAGES_DIE_POISEN);
+        if (this.alive < this.IMAGES_DIE_POISEN.length-1) {
+          
+          this.playAnimation(this.IMAGES_DIE_POISEN); 
+          this.alive++
+        }else{
+          return
+        }
+
+   
+        
       } else if(this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT_POISEN);
       }
@@ -110,4 +121,7 @@ class Character extends MovableObject {
         
       }, 150);
   }
+
+
+
 }
