@@ -8,11 +8,11 @@ offset = {
   y : 20,
   width : -30,
   height : -30}
-IMAGES_MOVING_YELLOW = ['img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png',
-'img/2.Enemy/2 Jelly fish/Regular damage/Yellow 2.png',
-'img/2.Enemy/2 Jelly fish/Regular damage/Yellow 3.png',
-'img/2.Enemy/2 Jelly fish/Regular damage/Yellow 4.png'
-]
+// IMAGES_MOVING_YELLOW = ['img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png',
+// 'img/2.Enemy/2 Jelly fish/Regular damage/Yellow 2.png',
+// 'img/2.Enemy/2 Jelly fish/Regular damage/Yellow 3.png',
+// 'img/2.Enemy/2 Jelly fish/Regular damage/Yellow 4.png'
+// ]
 IMAGES_MOVING_PURPLE = ['img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png',
 'img/2.Enemy/2 Jelly fish/Regular damage/Lila 2.png',
 'img/2.Enemy/2 Jelly fish/Regular damage/Lila 3.png',
