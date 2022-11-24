@@ -28,21 +28,21 @@ class World {
   run() {
     setInterval(() => {
       this.checkCollisions();
-      this.checkMakeBubble();
       this.checkCollect();
       this.checkFreeWay()
 
     }, 1000/ 60);
   }
 
-  checkMakeBubble() {
-    if (this.keyboard.E) {
+
+  makeBubble() {
+   
       let bubble = new StandartBubble(
         this.character.x + 180,
         this.character.y + 100
       );
       this.bubbles.push(bubble);
-    }
+    
   }
 
   checkCollect() {
