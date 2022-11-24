@@ -10,6 +10,7 @@ class MovableObject extends DrawableObject {
   }
 
   isColliding(obj) {
+    
    
     return (
       this.x + this.offset.x + (this.width + this.offset.width) >= obj.x + obj.offset.x &&

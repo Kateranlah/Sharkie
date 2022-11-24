@@ -47,6 +47,8 @@ const level1 = new Level(
     new BackgroundObject("img/3. Background/Layers/4.Fondo 2/L2.png", 719 * 5),
     new BackgroundObject("img/3. Background/Layers/2. Floor/L2.png", 719 * 5),
   ],
-  
+  [
+    new WallBarrier(60, 480), new WallBarrier(480, 480)
+  ]
   
 );

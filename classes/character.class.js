@@ -10,6 +10,10 @@ class Character extends MovableObject {
   slapping = false
   lastMove = new Date().getTime();
   sleep = false
+  barrierBlockRight = false;
+  barrierBlockLeft = false;
+  barrierBlockUp = false;
+  barrierBlockDown = false;
   offset = {
     x : 60,
     y : 100,
@@ -122,29 +126,36 @@ IMAGES_SLAP = [
 
   animate() {
     setInterval(() => {
+    
       if(!this.isDead()){
-        if (this.world.keyboard.UP && this.y + this.offset.y > 0) {
+        if (this.world.keyboard.UP && this.y + this.offset.y > 0 && !this.barrierBlockUp) {
             this.moveUp();
+            this.barrierBlockDown = false;
             this.setLastMove()
             this.sleep = false
             
         }
 
-       
-        this.lastMove = new Date().getTime();
-        if (this.world.keyboard.DOWN && this.y < 480 + this.offset.height) {
+        if (this.world.keyboard.DOWN && this.y < 480 + this.offset.height && !this.barrierBlockDown) {
             this.moveDown();
             this.setLastMove()
+            
+            this.barrierBlockUp = false;
+           
         
         }
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) 
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.barrierBlockRight) 
         {this.moveRight();
           this.setLastMove()
+      
+          this.barrierBlockLeft = false;
+         
      
         }
-        if (this.world.keyboard.LEFT && this.x > 0) {
+        if (this.world.keyboard.LEFT && this.x > 0 && !this.barrierBlockLeft)  {
             this.moveLeft();
             this.setLastMove()
+            this.barrierBlockRight = false;
          
         }
       
