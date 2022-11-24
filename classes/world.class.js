@@ -37,12 +37,19 @@ class World {
 
   makeBubble() {
    
+    if (!this.character.madeRecentBubble) {
+      
+    
       let bubble = new StandartBubble(
-        this.character.x + 180,
+        this.character.x + 160,
         this.character.y + 100
       );
       this.bubbles.push(bubble);
-    
+      this.character.madeRecentBubble = true;
+      setTimeout(() => {
+        this.character.madeRecentBubble = false;
+      }, 900);
+    }
   }
 
   checkCollect() {
