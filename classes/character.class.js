@@ -2,18 +2,18 @@ class Character extends MovableObject {
   height = 200;
   width = 200;
   world;
-  speed = 40;
+  speed = 4;
   coinsCollected = 0
   poisenCollected = 0
   alive = 0
   idled = 0
-  slapping = false
   lastMove = new Date().getTime();
   sleep = false
   barrierBlockRight = false;
   barrierBlockLeft = false;
   barrierBlockUp = false;
   barrierBlockDown = false;
+  slapping = false
   offset = {
     x : 60,
     y : 100,
@@ -119,8 +119,8 @@ IMAGES_SLAP = [
     this.loadImages(this.IMAGES_SLAP);
     this.loadImages(this.IMAGES_HURT_POISEN);
     this.loadImages(this.IMAGES_LONG_IDLE);
+    this.loadImages(this.IMAGES_SLEEP);
 
-   
     this.animate();
   }
 
@@ -175,7 +175,7 @@ IMAGES_SLAP = [
 
 
     setInterval(() => {
-     
+     console.log(this.slapping);
       if(this.isDead()){
         if (this.alive < this.IMAGES_DIE_POISEN.length-1) {
           
@@ -186,16 +186,23 @@ IMAGES_SLAP = [
 
    
         
-      } else if(this.isHurt()) {
+      } else 
+  
+      
+      
+      if(this.isHurt()) {
         this.playAnimation(this.IMAGES_HURT_POISEN);
       }
       else
+      if (this.slapping) {
+        this.playAnimation(this.IMAGES_SLAP, this.playOnes);
+       
+    
+      }else 
         if (this.world.keyboard.UP || this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
           this.playAnimation(this.IMAGES_SWIM);
         }else   
-        if (this.world.keyboard.SPACE) {
-          this.playAnimation(this.IMAGES_SLAP);
-        }else   
+        
         
         if(this.sleep && this.idled == this.IMAGES_LONG_IDLE.length ){
           this.playAnimation(this.IMAGES_SLEEP);
@@ -208,6 +215,7 @@ IMAGES_SLAP = [
           this.idled++
           this.sleep = true
         }else 
+       
       
         {
         

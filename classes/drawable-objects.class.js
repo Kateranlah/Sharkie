@@ -6,6 +6,7 @@ class DrawableObject{
     currentImage = 0;
     height = 100;
     width = 150;
+   
 
     constructor(){
 

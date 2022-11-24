@@ -3,6 +3,10 @@ class MovableObject extends DrawableObject {
   otherDirection = false;
   energy = 100;
   lastHit = 0;
+  doneWithAnimation = false;
+  startWithAnimation = false;
+  playOnes = true;
+  
 
 
   constructor() {
@@ -37,12 +41,45 @@ class MovableObject extends DrawableObject {
     this.world.camera_x = -this.x + 200;
   }
 
-  playAnimation(images) {
-    let i = this.currentImage % images.length;
-    let path = images[i];
-    this.img = this.imageCache[path];
-    this.currentImage++;
-  }
+  // playAnimation(images) {
+
+     
+  //     this.doneWithAnimation = false
+  //     let i = this.currentImage % images.length;
+  //     let path = images[i];
+  //     this.img = this.imageCache[path];
+  //     this.currentImage++;
+  //     this.doneWithAnimation = true   
+    
+ 
+  // }
+
+  playAnimation(images, ones) {
+    if (ones && !this.doneWithAnimation) {
+
+        if (!this.startWithAnimation) { // Setting currentImage just once
+            this.currentImage = 0; // If it's an one time animation, it should start with the  first img
+        }
+
+        this.startWithAnimation = true;
+        let i = this.currentImage % images.length; // (0 % 3 = 0), (1 % 3 = 1), (2 % 3 = 2), (3 % 3 = 0), (4 % 3 = 1), (5 % 3 = 2), (6 % 3 = 0), (7 % 3 = 1), (8 % = 2)
+        let path = images[i]; // Temporary store the path of each img
+        this.img = this.imageCache[path]; // Change img from class
+        this.currentImage++;
+
+        if (this.currentImage == images.length) { // Stop animation if all images are animated once
+            this.doneWithAnimation = true;
+            this.startWithAnimation = false;
+        }
+    } else if (!ones) {
+        let i = this.currentImage % images.length; // (0 % 3 = 0), (1 % 3 = 1), (2 % 3 = 2), (3 % 3 = 0), (4 % 3 = 1), (5 % 3 = 2), (6 % 3 = 0), (7 % 3 = 1), (8 % = 2)
+        let path = images[i]; // Temporary store the path of each img
+        this.img = this.imageCache[path]; // Change img from class
+        this.currentImage++;
+        this.doneWithAnimation = false;
+    }
+}
+
 
   hit() {
     if(!this.isHurt()){
@@ -67,4 +104,6 @@ class MovableObject extends DrawableObject {
     timepassed = timepassed / 1000; // from ms to s
     return timepassed < 0.5;
   }
+
+
 }
