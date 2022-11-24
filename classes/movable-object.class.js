@@ -45,12 +45,15 @@ class MovableObject extends DrawableObject {
   }
 
   hit() {
+    if(!this.isHurt()){
     this.energy -= 5;
     if (this.energy < 0) {
       this.energy = 0;
     } else {
       this.lastHit = new Date().getTime();
     }
+    }
+    
   }
 
  
@@ -62,6 +65,6 @@ class MovableObject extends DrawableObject {
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
     timepassed = timepassed / 1000; // from ms to s
-    return timepassed < 1;
+    return timepassed < 0.5;
   }
 }

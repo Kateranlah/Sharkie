@@ -129,33 +129,40 @@ IMAGES_SLAP = [
     
       if(!this.isDead()){
         if (this.world.keyboard.UP && this.y + this.offset.y > 0 && !this.barrierBlockUp) {
-            this.moveUp();
+          this.sleep = false
+          this.moveUp();
             this.barrierBlockDown = false;
             this.setLastMove()
-            this.sleep = false
+        
             
         }
 
         if (this.world.keyboard.DOWN && this.y < 480 + this.offset.height && !this.barrierBlockDown) {
-            this.moveDown();
+          this.barrierBlockUp = false;
+          this.moveDown();
             this.setLastMove()
             
-            this.barrierBlockUp = false;
+            
            
         
         }
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.barrierBlockRight) 
-        {this.moveRight();
+        {
+             this.barrierBlockLeft = false;
+          this.moveRight();
+       
           this.setLastMove()
       
-          this.barrierBlockLeft = false;
+         
          
      
         }
         if (this.world.keyboard.LEFT && this.x > 0 && !this.barrierBlockLeft)  {
-            this.moveLeft();
+            
+           this.barrierBlockRight = false;
+          this.moveLeft();
             this.setLastMove()
-            this.barrierBlockRight = false;
+           
          
         }
       
