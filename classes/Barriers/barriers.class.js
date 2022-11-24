@@ -6,7 +6,7 @@ class Barriers extends MovableObject{
         width: 0,
         height: 0,
       };
-    y= 0
+    y =  0
 
 constructor(){
     super();
