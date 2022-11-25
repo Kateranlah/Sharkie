@@ -69,14 +69,48 @@ class World {
   }
 
   checkCollisions() {
-   
-
+    let e = 0
     this.level.enemies.forEach((enemy) => {
+     
       if (this.character.isColliding(enemy)) {
         this.character.hit(enemy);
         this.healthBar.setPercentage(this.character.energy);
       }
+    
+      
+  if(this.bubbles.length >= 1){
+   let i = 0
+      this.bubbles.forEach(b => {
+       
+      
+        if (this.bubbles[i].isColliding(enemy)) 
+        {
+          this.bubbles.splice(i,1)
+          if(enemy instanceof JellyfishElectric || enemy instanceof Jellyfish){
+this.level.enemies[e].dead = true
+
+       
+      
+      
+      console.log(e, enemy);
+          }
+         
+         
+
+         
+
+     
+
+         
+         }
+         i++
+      });
+        
+       }
+       e++  
+      
     });
+    
   }
 
   draw() {
