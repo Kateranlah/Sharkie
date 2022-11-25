@@ -51,10 +51,16 @@ class JellyfishElectric extends MovableObject {
     setInterval(() => {
       if (!this.dead) {
         this.playAnimation(this.IMAGES_MOVING_PINK);
-
-        this.moveUp();
-
-        this.moveDown();
+        if (this.y > 100 && !this.swimUpDone) {
+             this.moveUp();
+        }else if(this.y <= 100 && !this.swimUpDone){
+            this.swimUpDone = true;
+        }else if(this.swimUpDone && this.y < 380){
+            this.moveDown();
+        }else{
+            this.swimUpDone = false;
+        }
+       
       } else {
         this.playAnimation(this.IMAGES_DEAD_PINK);
         this.moveUp();

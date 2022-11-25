@@ -6,7 +6,7 @@ class MovableObject extends DrawableObject {
   doneWithAnimation = false;
   startWithAnimation = false;
   playOnes = true;
-
+  swimUpDone = false;
   
 
 
