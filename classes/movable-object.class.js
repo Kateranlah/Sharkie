@@ -7,7 +7,6 @@ class MovableObject extends DrawableObject {
   startWithAnimation = false;
   playOnes = true;
   swimUpDone = false;
-  
 
 
   constructor() {
@@ -15,19 +14,20 @@ class MovableObject extends DrawableObject {
   }
 
   isColliding(obj) {
-    
-   
     return (
-      this.x + this.offset.x + (this.width + this.offset.width) >= obj.x + obj.offset.x &&
-      this.x + this.offset.x <= obj.x + obj.offset.x + (obj.width + obj.offset.width) &&
-      this.y + this.offset.y + (this.height + this.offset.height) >= obj.y + obj.offset.y &&
-      this.y + this.offset.y <= obj.y + obj.offset.y + (obj.height + obj.offset.height)
+      this.x + this.offset.x + (this.width + this.offset.width) >=
+        obj.x + obj.offset.x &&
+      this.x + this.offset.x <=
+        obj.x + obj.offset.x + (obj.width + obj.offset.width) &&
+      this.y + this.offset.y + (this.height + this.offset.height) >=
+        obj.y + obj.offset.y &&
+      this.y + this.offset.y <=
+        obj.y + obj.offset.y + (obj.height + obj.offset.height)
     );
   }
 
   moveUp() {
     this.y -= this.speed;
-   
   }
   moveDown() {
     this.y += this.speed;
@@ -45,87 +45,108 @@ class MovableObject extends DrawableObject {
 
   // playAnimation(images) {
 
-     
   //     this.doneWithAnimation = false
   //     let i = this.currentImage % images.length;
   //     let path = images[i];
   //     this.img = this.imageCache[path];
   //     this.currentImage++;
-  //     this.doneWithAnimation = true   
-    
- 
+  //     this.doneWithAnimation = true
+
   // }
 
   playAnimation(images, ones) {
     if (ones && !this.doneWithAnimation) {
+      if (!this.startWithAnimation) {
+        // Setting currentImage just once
+        this.currentImage = 0; // If it's an one time animation, it should start with the  first img
+      }
 
-        if (!this.startWithAnimation) { // Setting currentImage just once
-            this.currentImage = 0; // If it's an one time animation, it should start with the  first img
-        }
+      this.startWithAnimation = true;
+      let i = this.currentImage % images.length; // (0 % 3 = 0), (1 % 3 = 1), (2 % 3 = 2), (3 % 3 = 0), (4 % 3 = 1), (5 % 3 = 2), (6 % 3 = 0), (7 % 3 = 1), (8 % = 2)
+      let path = images[i]; // Temporary store the path of each img
+      this.img = this.imageCache[path]; // Change img from class
+      this.currentImage++;
 
-        this.startWithAnimation = true;
-        let i = this.currentImage % images.length; // (0 % 3 = 0), (1 % 3 = 1), (2 % 3 = 2), (3 % 3 = 0), (4 % 3 = 1), (5 % 3 = 2), (6 % 3 = 0), (7 % 3 = 1), (8 % = 2)
-        let path = images[i]; // Temporary store the path of each img
-        this.img = this.imageCache[path]; // Change img from class
-        this.currentImage++;
-
-        if (this.currentImage == images.length) { // Stop animation if all images are animated once
-            this.doneWithAnimation = true;
-            this.startWithAnimation = false;
-        }
+      if (this.currentImage == images.length) {
+        // Stop animation if all images are animated once
+        this.doneWithAnimation = true;
+        this.startWithAnimation = false;
+      }
     } else if (!ones) {
-        let i = this.currentImage % images.length; // (0 % 3 = 0), (1 % 3 = 1), (2 % 3 = 2), (3 % 3 = 0), (4 % 3 = 1), (5 % 3 = 2), (6 % 3 = 0), (7 % 3 = 1), (8 % = 2)
-        let path = images[i]; // Temporary store the path of each img
-        this.img = this.imageCache[path]; // Change img from class
-        this.currentImage++;
-        this.doneWithAnimation = false;
+      let i = this.currentImage % images.length; // (0 % 3 = 0), (1 % 3 = 1), (2 % 3 = 2), (3 % 3 = 0), (4 % 3 = 1), (5 % 3 = 2), (6 % 3 = 0), (7 % 3 = 1), (8 % = 2)
+      let path = images[i]; // Temporary store the path of each img
+      this.img = this.imageCache[path]; // Change img from class
+      this.currentImage++;
+      this.doneWithAnimation = false;
     }
-}
-
-
-  hit(enemy) {
-    if(!this.isHurt() && !this.slapping){
-      this.checkWhatHit(enemy)
-    this.energy -= 5;
-    if (this.energy <= 0) {
-      this.checkWhatHit(enemy, true)
-      this.energy = 0;
-    } else {
-      this.lastHit = new Date().getTime();
-     
-    }
-    }
-    
   }
 
+  hit(enemy) {
+    if(!this.isHurt() && this.slapping && enemy instanceof Endboss){
+      enemy.energy = 0
+      
+    }
 
+
+
+    if (!this.isHurt() && !this.slapping) {
+      this.checkWhatHit(enemy);
+
+      
+      if (this.energy <= 0) {
+        this.checkWhatHit(enemy, true);
+        this.energy -= 25;
+      } else {
+        this.lastHit = new Date().getTime();
+      }
+    }
+  }
 
   isDead() {
     return this.energy == 0;
   }
 
-checkWhatHit(enemy, dead){
-  if(enemy instanceof JellyfishElectric){ this.electric = true
-    this.setLastMove();
-    if(!dead){
-    setTimeout(() => {
-      this.electric = false
-    }, 500);}
+  checkWhatHit(enemy, dead) {
+    if (enemy instanceof JellyfishElectric) {
+      this.electric = true;
+      this.setLastMove();
+      this.energy -= 10;
+      if (!dead) {
+        setTimeout(() => {
+          this.electric = false;
+        }, 500);
+      }
+    }
+
+   
+
+
+if (enemy instanceof Endboss) {
+
+    this.energy -= 40;
+
   }
-  if(enemy instanceof Jellyfish){ this.poisen = true
-    this.setLastMove();
-    if(!dead){
-    setTimeout(() => {
-      this.poisen = false
-    }, 500);}
+ 
+    
+  
+
+
+    if (enemy instanceof Jellyfish || enemy instanceof Endboss) {
+      this.poisen = true;
+      this.setLastMove();
+      this.energy -= 5;
+      if (!dead) {
+        setTimeout(() => {
+          this.poisen = false;
+        }, 500);
+      }
+    }
   }
-}
+
 
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
     timepassed = timepassed / 1000; // from ms to s
     return timepassed < 0.5;
   }
-
-
 }

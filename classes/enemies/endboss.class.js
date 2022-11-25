@@ -86,7 +86,13 @@ class Endboss extends MovableObject {
         this.firstAppearance++;
 
     }else{
-        this.playAnimation(this.IMAGES_FLOATING)
+
+      if (this.energy <= 0) {
+        this.playAnimation(this.IMAGES_DEAD, this.playOnes)
+      }else{ this.playAnimation(this.IMAGES_FLOATING) }
+
+
+        
     }
         
     }
