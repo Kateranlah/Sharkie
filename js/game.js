@@ -29,6 +29,9 @@ window.addEventListener(`keydown`,(e)=>{
     if (e.keyCode == 69) {
         keyboard.E = true;
     }
+    if (e.keyCode == 82) {
+        keyboard.R = true;
+    }
 
 })
 
@@ -36,6 +39,7 @@ window.addEventListener(`keydown`,(e)=>{
 
 
     window.addEventListener(`keyup`,(e)=>{
+
         if (e.keyCode == 39 || e.keyCode == 68 ) {
            
             keyboard.RIGHT = false;
@@ -60,6 +64,13 @@ window.addEventListener(`keydown`,(e)=>{
         if (e.keyCode == 69) {
             setTimeout(() => {
                 keyboard.E = false;
+            }, 500);
+           
+        }
+
+        if (e.keyCode == 82) {
+            setTimeout(() => {
+                keyboard.R = false;
             }, 500);
            
         }

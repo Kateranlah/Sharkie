@@ -199,7 +199,13 @@ class Character extends MovableObject {
 
         if (this.world.keyboard.E) {
           setTimeout(() => {
-            world.makeBubble();
+            world.blowBubble();
+          }, 900);
+          this.setLastMove();
+        }
+        if (this.world.keyboard.R) {
+          setTimeout(() => {
+            world.blowPoisenBubble();
           }, 900);
           this.setLastMove();
         }
