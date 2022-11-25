@@ -52,6 +52,17 @@ class Character extends MovableObject {
     "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png",
   ];
 
+  IMAGES_BUBBLE_POISEN = [
+    "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png",
+    "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png",
+    "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png",
+    "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.png",
+    "img/1.Sharkie/4.Attack/Bubble trap/For Whale/5.png",
+    "img/1.Sharkie/4.Attack/Bubble trap/For Whale/6.png",
+    "img/1.Sharkie/4.Attack/Bubble trap/For Whale/7.png",
+    "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png",
+  ];
+
   IMAGES_SLEEP = [
     "img/1.Sharkie/2.Long_IDLE/i11.png",
     "img/1.Sharkie/2.Long_IDLE/i12.png",
@@ -147,6 +158,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_LONG_IDLE);
     this.loadImages(this.IMAGES_SLEEP);
     this.loadImages(this.IMAGES_BUBBLE);
+    this.loadImages(this.IMAGES_BUBBLE_POISEN);
     this.loadImages(this.IMAGES_HURT_SHOCK);
     this.loadImages(this.IMAGES_DIE_SHOCK);
 
@@ -234,14 +246,23 @@ class Character extends MovableObject {
       } else if (this.slapping && !this.isDead()) {
         this.playAnimation(this.IMAGES_SLAP, this.playOnes);
       } else if (
-        this.world.keyboard.E ||
-        (this.madeRecentBubble && !this.isDead() && !this.isHurt())
+        this.world.keyboard.E &&
+        !this.madeRecentBubble &&
+        !this.isDead() &&
+        !this.isHurt()
       ) {
         this.playAnimation(this.IMAGES_BUBBLE, this.playOnes);
-      } else if (!this.isDead() && 
-        this.world.keyboard.UP ||
+      } else if (
+        this.world.keyboard.R &&
+        !this.madeRecentBubble &&
+        !this.isDead() &&
+        !this.isHurt()
+      ) {
+        this.playAnimation(this.IMAGES_BUBBLE_POISEN, this.playOnes);
+      } else if (
+        (!this.isDead() && this.world.keyboard.UP) ||
         this.world.keyboard.RIGHT ||
-        this.world.keyboard.LEFT 
+        this.world.keyboard.LEFT
       ) {
         this.playAnimation(this.IMAGES_SWIM);
       } else if (
