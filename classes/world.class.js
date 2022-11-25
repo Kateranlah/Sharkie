@@ -35,7 +35,13 @@ class World {
     }, 1000/ 60);
   }
 
-
+creatBubble(bubble){
+  this.bubbles.push(bubble);
+  this.character.madeRecentBubble = true;
+  setTimeout(() => {
+    this.character.madeRecentBubble = false;
+  }, 900);
+}
 
   checkCollect() {
     this.level.collectables.forEach((item) => {

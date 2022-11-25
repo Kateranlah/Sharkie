@@ -296,12 +296,9 @@ class Character extends MovableObject {
         this.x + 160,
         this.y + 100
       );
-      this.world.bubbles.push(bubble);
-      this.madeRecentBubble = true;
-      setTimeout(() => {
-        this.madeRecentBubble = false;
-      }, 900);
-    }
+      this.world.creatBubble(bubble);;
+     
+  }
   }
 
   
@@ -312,11 +309,8 @@ class Character extends MovableObject {
         this.x + 160,
         this.y + 100
       );
-      this.world.bubbles.push(bubble);
-      this.madeRecentBubble = true;
-      setTimeout(() => {
-        this.madeRecentBubble = false;
-      }, 900);
+      this.world.creatBubble(bubble);
+     
     }
   }
 
