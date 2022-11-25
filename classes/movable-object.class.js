@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
   startWithAnimation = false;
   playOnes = true;
   swimUpDone = false;
+  hitEndboss = false;
 
 
   constructor() {
@@ -83,7 +84,13 @@ class MovableObject extends DrawableObject {
 
   hit(enemy) {
     if(!this.isHurt() && this.slapping && enemy instanceof Endboss){
-      enemy.energy = 0
+      
+      if (this.energy > 0 && !this.hitEndboss) {
+        this.hitEndboss = true
+        enemy.energy -=25;
+       }
+
+       
       
     }
 
@@ -95,7 +102,8 @@ class MovableObject extends DrawableObject {
       
       if (this.energy <= 0) {
         this.checkWhatHit(enemy, true);
-        this.energy -= 25;
+        this.energy = 0;
+       
       } else {
         this.lastHit = new Date().getTime();
       }
@@ -121,7 +129,7 @@ class MovableObject extends DrawableObject {
    
 
 
-if (enemy instanceof Endboss) {
+if (enemy instanceof Endboss && !world.character.hitEndboss) {
 
     this.energy -= 40;
 
