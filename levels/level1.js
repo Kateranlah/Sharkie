@@ -1,7 +1,7 @@
 
 
 const level1 = new Level(
-  [new Jellyfish(), new Jellyfish(), new Jellyfish(),
+  [new Jellyfish(), new Jellyfish(), new JellyfishElectric(),
     new Endboss],
   [
     new Poisen(), new Poisen(), new Poisen(), new Poisen(),
@@ -48,7 +48,7 @@ const level1 = new Level(
     new BackgroundObject("img/3. Background/Layers/2. Floor/D2.png", 719 * 5),
   ],
   [
-    new WallBarrier(60, 480), new WallBarrier(480, 230), new CaveBarrier(2500)
+    new WallBarrier(60, 480), new CaveBarrier(2500)
   ]
   
 );

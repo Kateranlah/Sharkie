@@ -36,7 +36,7 @@ class DrawableObject{
     }
 
     drawHitbox(ctx){
-        if(this instanceof Character || this instanceof Jellyfish || this instanceof Endboss){
+        if(this instanceof Character || this instanceof Jellyfish || this instanceof JellyfishElectric || this instanceof Barriers ||this instanceof Endboss){
         ctx.beginPath();
         ctx.lineWidth= '3';
         ctx.strokeStyle= 'blue';
