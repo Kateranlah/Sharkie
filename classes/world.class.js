@@ -36,37 +36,6 @@ class World {
   }
 
 
-  blowBubble() {
-
-    if (!this.character.madeRecentBubble && !this.character.isHurt()) {
-      console.log(this.keyboard.E);
-       let bubble = new StandartBubble(
-        this.character.x + 160,
-        this.character.y + 100
-      );
-      this.bubbles.push(bubble);
-      this.character.madeRecentBubble = true;
-      setTimeout(() => {
-        this.character.madeRecentBubble = false;
-      }, 900);
-    }
-  }
-
-  
-  blowPoisenBubble() {
- 
-    if (!this.character.madeRecentBubble && !this.character.isHurt()) {
-       let bubble = new PoisenBubble(
-        this.character.x + 160,
-        this.character.y + 100
-      );
-      this.bubbles.push(bubble);
-      this.character.madeRecentBubble = true;
-      setTimeout(() => {
-        this.character.madeRecentBubble = false;
-      }, 900);
-    }
-  }
 
   checkCollect() {
     this.level.collectables.forEach((item) => {

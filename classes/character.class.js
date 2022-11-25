@@ -211,13 +211,13 @@ class Character extends MovableObject {
 
         if (this.world.keyboard.E && !this.isHurt()) {
           setTimeout(() => {
-            world.blowBubble();
+            this.blowBubble();
           }, 900);
           this.setLastMove();
         }
         if (this.world.keyboard.R && !this.isHurt()) {
           setTimeout(() => {
-            world.blowPoisenBubble();
+            this.blowPoisenBubble();
           }, 900);
           this.setLastMove();
         }
@@ -286,6 +286,38 @@ class Character extends MovableObject {
     setTimeout(() => {
       this.slapping = false;
     }, 500);
+  }
+
+  
+  blowBubble() {
+
+    if (!this.madeRecentBubble && !this.isHurt()) {
+       let bubble = new StandartBubble(
+        this.x + 160,
+        this.y + 100
+      );
+      this.world.bubbles.push(bubble);
+      this.madeRecentBubble = true;
+      setTimeout(() => {
+        this.madeRecentBubble = false;
+      }, 900);
+    }
+  }
+
+  
+  blowPoisenBubble() {
+ 
+    if (!this.madeRecentBubble && !this.isHurt()) {
+       let bubble = new PoisenBubble(
+        this.x + 160,
+        this.y + 100
+      );
+      this.world.bubbles.push(bubble);
+      this.madeRecentBubble = true;
+      setTimeout(() => {
+        this.madeRecentBubble = false;
+      }, 900);
+    }
   }
 
   isLongIdle() {
