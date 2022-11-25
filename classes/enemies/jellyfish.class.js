@@ -30,14 +30,14 @@ IMAGES_DEAD_PURPLE = ['img/2.Enemy/2 Jelly fish/Dead/Lila/L1.png',
 
 
 
-    constructor(){
+    constructor(x){
         super().loadImage('img/2.Enemy/2 Jelly fish/Regular damage/Lila 1.png');
         this.loadImages(this.IMAGES_MOVING_PURPLE);
         this.loadImages(this.IMAGES_MOVING_YELLOW);
         this.loadImages(this.IMAGES_DEAD_PURPLE);
         this.loadImages(this.IMAGES_DEAD_YELLOW);
 
-        this.x = 200 + Math.random() * 500;
+        this.x = x
         this.y = 50 + Math.random() * 300;
       this.animate()
      

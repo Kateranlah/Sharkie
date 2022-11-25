@@ -36,13 +36,13 @@ class JellyfishElectric extends MovableObject {
     "img/2.Enemy/2 Jelly fish/Dead/Pink/P4.png",
   ];
 
-  constructor() {
+  constructor(x) {
     super().loadImage("img/2.Enemy/2 Jelly fish/Súper dangerous/Pink 1.png");
     this.loadImages(this.IMAGES_MOVING_PINK);
     this.loadImages(this.IMAGES_MOVING_GREEN);
     this.loadImages(this.IMAGES_DEAD_PINK);
     this.loadImages(this.IMAGES_DEAD_GREEN);
-    this.x = 200 + Math.random() * 500;
+    this.x = x
     this.y = 50 + Math.random() * 300;
     this.animate();
   }
