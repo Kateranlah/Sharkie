@@ -293,8 +293,7 @@ class Character extends MovableObject {
 
     if (!this.madeRecentBubble && !this.isHurt()) {
        let bubble = new StandartBubble(
-        this.x + 160,
-        this.y + 100
+       
       );
       this.world.creatBubble(bubble);;
      
@@ -305,10 +304,7 @@ class Character extends MovableObject {
   blowPoisenBubble() {
  
     if (!this.madeRecentBubble && !this.isHurt()) {
-       let bubble = new PoisenBubble(
-        this.x + 160,
-        this.y + 100
-      );
+       let bubble = new PoisenBubble();
       this.world.creatBubble(bubble);
      
     }

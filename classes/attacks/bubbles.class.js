@@ -12,12 +12,20 @@ class Bubbles extends MovableObject {
   
   }
 
-  makeBubble(x, y) {
-    this.x = x;
-    this.y = y;
+  makeBubble() {     
+  
+
+   
+    if (!world.character.otherDirection) {
+        this.x =world.character.x + 160
+    }else{
+        this.x =world.character.x
+    }
+ this.y =world.character.y + 100 
     this.speedY;
     this.driftUp();
     this.driftX();
+    
   }
 
   checkCicle() {
@@ -32,7 +40,12 @@ class Bubbles extends MovableObject {
   driftX() {
     setInterval(() => {
         if(this.firstApperance){
-            this.x += 10;
+            if (!world.character.otherDirection){
+                this.x += 10;
+            }else{
+                this.x -= 10;
+            }
+            
             setTimeout(() => {
                 this.firstApperance = false
             }, 500);
