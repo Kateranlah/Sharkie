@@ -2,7 +2,7 @@ class Jellyfish extends MovableObject{
 
 height = 120;
 width = 70;
-speed = 0.15;
+speed = 5;
 offset = {
   x : 15,
   y : 20,
@@ -47,10 +47,11 @@ IMAGES_DEAD_PURPLE = ['img/2.Enemy/2 Jelly fish/Dead/Lila/L1.png',
         setInterval(() => {
           if (!this.dead) {
             this.playAnimation(this.IMAGES_MOVING_PURPLE);
-            this.moveUp();
-            this.moveDown();
+           
+          
         }else{
             this.playAnimation(this.IMAGES_DEAD_PURPLE);
+            this.moveUp();
         }
         }, 200);
 
