@@ -68,15 +68,20 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_ATTACK);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
-    this.x = 900
+    this.x = 2200
     this.y = 0
-    this.animate();
-  }
+    this.energy = 100
 
+
+      this.animate();
+ 
+  
+  }
   animate() {
     setInterval(() => {
     
-      if(this.firstAppearance <= this.IMAGES_INTRODUCE.length -1){
+    if (world.character.x > 1800) {
+       if(this.firstAppearance <= this.IMAGES_INTRODUCE.length -1){
         this.playAnimation(this.IMAGES_INTRODUCE)
         this.firstAppearance++;
 
@@ -84,6 +89,8 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_FLOATING)
     }
         
+    }
+     
    
     }, 250);
    
