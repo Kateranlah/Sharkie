@@ -3,6 +3,7 @@ class Bubbles extends MovableObject {
   acceleration = 0.1;
   driftedX = 0;
   fullCicle = false;
+  firstApperance = true;
   width = 30;
   height = 30;
 
@@ -30,7 +31,14 @@ class Bubbles extends MovableObject {
 
   driftX() {
     setInterval(() => {
-        // if first made blow it far
+        if(this.firstApperance){
+            this.x += 10;
+            setTimeout(() => {
+                this.firstApperance = false
+            }, 500);
+        
+        
+        }
       if (this.driftedX < 5 && !this.fullCicle) {
         this.x += 3;
         this.driftedX += 1;

@@ -37,8 +37,8 @@ class World {
 
 
   blowBubble() {
- 
-    if (!this.character.madeRecentBubble) {
+
+    if (!this.character.madeRecentBubble && !this.character.isHurt()) {
       console.log(this.keyboard.E);
        let bubble = new StandartBubble(
         this.character.x + 160,
@@ -55,7 +55,7 @@ class World {
   
   blowPoisenBubble() {
  
-    if (!this.character.madeRecentBubble) {
+    if (!this.character.madeRecentBubble && !this.character.isHurt()) {
        let bubble = new PoisenBubble(
         this.character.x + 160,
         this.character.y + 100

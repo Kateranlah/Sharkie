@@ -197,13 +197,13 @@ class Character extends MovableObject {
           this.setLastMove();
         }
 
-        if (this.world.keyboard.E) {
+        if (this.world.keyboard.E && !this.isHurt()) {
           setTimeout(() => {
             world.blowBubble();
           }, 900);
           this.setLastMove();
         }
-        if (this.world.keyboard.R) {
+        if (this.world.keyboard.R && !this.isHurt()) {
           setTimeout(() => {
             world.blowPoisenBubble();
           }, 900);
@@ -235,7 +235,7 @@ class Character extends MovableObject {
         this.playAnimation(this.IMAGES_SLAP, this.playOnes);
       } else if (
         this.world.keyboard.E ||
-        (this.madeRecentBubble && !this.isDead())
+        (this.madeRecentBubble && !this.isDead() && !this.isHurt())
       ) {
         this.playAnimation(this.IMAGES_BUBBLE, this.playOnes);
       } else if (!this.isDead() && 
