@@ -6,6 +6,7 @@ class MovableObject extends DrawableObject {
   doneWithAnimation = false;
   startWithAnimation = false;
   playOnes = true;
+
   
 
 
@@ -81,23 +82,43 @@ class MovableObject extends DrawableObject {
 }
 
 
-  hit() {
+  hit(enemy) {
     if(!this.isHurt() && !this.slapping){
+      this.checkWhatHit(enemy)
     this.energy -= 5;
-    if (this.energy < 0) {
+    if (this.energy <= 0) {
+      this.checkWhatHit(enemy, true)
       this.energy = 0;
     } else {
       this.lastHit = new Date().getTime();
+     
     }
     }
     
   }
 
- 
+
 
   isDead() {
     return this.energy == 0;
   }
+
+checkWhatHit(enemy, dead){
+  if(enemy instanceof JellyfishElectric){ this.electric = true
+    this.setLastMove();
+    if(!dead){
+    setTimeout(() => {
+      this.electric = false
+    }, 500);}
+  }
+  if(enemy instanceof Jellyfish){ this.poisen = true
+    this.setLastMove();
+    if(!dead){
+    setTimeout(() => {
+      this.poisen = false
+    }, 500);}
+  }
+}
 
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;

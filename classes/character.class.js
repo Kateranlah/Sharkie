@@ -15,6 +15,8 @@ class Character extends MovableObject {
   barrierBlockDown = false;
   slapping = false;
   madeRecentBubble = false;
+  electric = false;
+  poisen = false;
   offset = {
     x: 60,
     y: 100,
@@ -101,6 +103,12 @@ class Character extends MovableObject {
     "img/1.Sharkie/5.Hurt/1.Poisoned/4.png",
   ];
 
+  IMAGES_HURT_SHOCK = [
+    "img/1.Sharkie/5.Hurt/2.Electric shock/1.png",
+    "img/1.Sharkie/5.Hurt/2.Electric shock/2.png",
+    "img/1.Sharkie/5.Hurt/2.Electric shock/3.png",
+  ];
+
   IMAGES_DIE_POISEN = [
     "img/1.Sharkie/6.dead/1.Poisoned/1.png",
     "img/1.Sharkie/6.dead/1.Poisoned/2.png",
@@ -116,6 +124,19 @@ class Character extends MovableObject {
     "img/1.Sharkie/6.dead/1.Poisoned/12.png",
   ];
 
+  IMAGES_DIE_SHOCK = [
+    "img/1.Sharkie/6.dead/2.Electro_shock/1.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/2.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/3.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/4.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/5.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/6.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/7.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/8.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/9.png",
+    "img/1.Sharkie/6.dead/2.Electro_shock/10.png",
+  ];
+
   constructor() {
     super().loadImage("img/1.Sharkie/1.IDLE/1.png");
     this.loadImages(this.IMAGES_IDLE);
@@ -126,6 +147,8 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_LONG_IDLE);
     this.loadImages(this.IMAGES_SLEEP);
     this.loadImages(this.IMAGES_BUBBLE);
+    this.loadImages(this.IMAGES_HURT_SHOCK);
+    this.loadImages(this.IMAGES_DIE_SHOCK);
 
     this.animate();
   }
@@ -175,48 +198,57 @@ class Character extends MovableObject {
         }
 
         if (this.world.keyboard.E) {
-         setTimeout(() => {
-          world.makeBubble()
-         }, 900);
-          ;
+          setTimeout(() => {
+            world.makeBubble();
+          }, 900);
           this.setLastMove();
         }
       }
     }, 1000 / 60);
 
     setInterval(() => {
-      console.log(this.energy);
-      if (this.isDead()) {
-        if (this.alive < this.IMAGES_DIE_POISEN.length - 1) {
-          this.playAnimation(this.IMAGES_DIE_POISEN);
-          this.alive++;
-        }
-      } else if (this.isHurt() && !this.slapping) {
-        this.playAnimation(this.IMAGES_HURT_POISEN);
-      } else if (this.slapping) {
-        this.playAnimation(this.IMAGES_SLAP, this.playOnes);
-        
-      } else 
-      if (this.world.keyboard.E || this.madeRecentBubble ) {
-        this.playAnimation(this.IMAGES_BUBBLE, this.playOnes);
-        
-        
+      if (this.isDead() && this.poisen) {
+        this.playAnimation(this.IMAGES_DIE_POISEN, this.playOnes);
+      } else if (this.isDead() && this.electric) {
+        this.playAnimation(this.IMAGES_DIE_SHOCK, this.playOnes);
       } else if (
+        this.isHurt() &&
+        this.poisen &&
+        !this.slapping &&
+        !this.isDead()
+      ) {
+        this.playAnimation(this.IMAGES_HURT_POISEN);
+      } else if (
+        this.isHurt() &&
+        this.electric &&
+        !this.slapping &&
+        !this.isDead()
+      ) {
+        this.playAnimation(this.IMAGES_HURT_SHOCK);
+      } else if (this.slapping && !this.isDead()) {
+        this.playAnimation(this.IMAGES_SLAP, this.playOnes);
+      } else if (
+        this.world.keyboard.E ||
+        (this.madeRecentBubble && !this.isDead())
+      ) {
+        this.playAnimation(this.IMAGES_BUBBLE, this.playOnes);
+      } else if (!this.isDead() && 
         this.world.keyboard.UP ||
         this.world.keyboard.RIGHT ||
-        this.world.keyboard.LEFT
+        this.world.keyboard.LEFT 
       ) {
         this.playAnimation(this.IMAGES_SWIM);
-      } else if (this.sleep && this.idled == this.IMAGES_LONG_IDLE.length) {
+      } else if (
+        this.sleep &&
+        this.idled == this.IMAGES_LONG_IDLE.length &&
+        !this.isDead()
+      ) {
         this.playAnimation(this.IMAGES_SLEEP);
-      } else if (this.isLongIdle() >= 10) {
+      } else if (this.isLongIdle() >= 10 && !this.isDead()) {
         this.playAnimation(this.IMAGES_LONG_IDLE);
         this.idled++;
         this.sleep = true;
-
-      } else 
-      
-      {
+      } else if (!this.isDead()) {
         this.playAnimation(this.IMAGES_IDLE);
       }
     }, 150);

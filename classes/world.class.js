@@ -12,6 +12,7 @@ class World {
   bubbles = [];
   barriers = new Barriers
 
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -88,7 +89,7 @@ class World {
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
-        this.character.hit();
+        this.character.hit(enemy);
         this.healthBar.setPercentage(this.character.energy);
       }
     });
@@ -101,12 +102,13 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
    
     this.addObjectsToMap(this.level.lights);
+     this.addObjectsToMap(this.level.enemies);
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.barriers);
     this.addObjectsToMap(this.bubbles);
   
 
-    this.addObjectsToMap(this.level.enemies);
+   
     this.addObjectsToMap(this.level.collectables);
 
   
