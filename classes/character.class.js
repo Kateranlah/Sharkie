@@ -198,7 +198,7 @@ class Character extends MovableObject {
 
           this.setLastMove();
         }
-        if (this.world.keyboard.LEFT && this.x > 0 && !this.barrierBlockLeft) {
+        if (this.world.keyboard.LEFT && this.x > -450 && !this.barrierBlockLeft) {
           this.barrierBlockRight = false;
           this.moveLeft();
           this.setLastMove();

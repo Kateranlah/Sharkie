@@ -9,7 +9,7 @@ super();
     }
     resolveImageIndex(type, poisen){
        
-        if(type == 'coin'){this.percentage *= 10}
+        if(type == 'coin'){this.percentage *= 5}
         if(type == 'poisen'){this.percentage*=25}
 
         if(this.percentage == 100){
