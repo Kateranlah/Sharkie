@@ -9,7 +9,8 @@ const level1 = new Level(
     new Coin(), new Coin(),new Coin(), new Coin(), new Coin(),
     new Coin(), new Coin(), new Coin(),new Coin(), new Coin()
   ],
-  [//new Light(1600,480)
+  [new Light(1200,480),
+    new Light(1120,480)
   ],
   [
     new BackgroundObject("img/3. Background/Layers/5. Water/L2.png", -719),
@@ -33,13 +34,18 @@ const level1 = new Level(
     new BackgroundObject("img/3. Background/Layers/4.Fondo 2/D1.png", 719 * 2),
     new BackgroundObject("img/3. Background/Layers/2. Floor/D1.png", 719 * 2),
 
+  new BackgroundObject("img/3. Background/Barrier/3.png", 1300),
+
     new BackgroundObject("img/3. Background/Layers/5. Water/D2.png", 719 * 3),
     new BackgroundObject("img/3. Background/Layers/3.Fondo 1/D2.png", 719 * 3),
     new BackgroundObject("img/3. Background/Layers/4.Fondo 2/D2.png", 719 * 3),
     new BackgroundObject("img/3. Background/Layers/2. Floor/D2.png", 719 * 3),
+
+    new BackgroundObject("img/3. Background/Barrier/3.png", 2400),
   ],
   [
     new WallBarrier(60, 480), 
+    new CaveBarrier(1200), 
     new GroundBarrier(2250, 180 , 340, 500), 
     new WallBarrier(2750, 480),
   ]

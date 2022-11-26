@@ -1,6 +1,6 @@
 class Collectables extends MovableObject {
-  width = 30;
-  height = 30;
+  width = 60;
+  height = 45;
 
   offset = {
     x: 0,
