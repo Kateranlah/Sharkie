@@ -1,3 +1,46 @@
 canvas {
     background-color: black;
+    display: block;
 }
+
+body{
+    margin: 0;
+    background: url("img/3. Background/Mesa de trabajo 1.png"), center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: lucky, Arial, Helvetica, sans-serif;
+
+}
+
+h1{
+    font-size: 64px;
+    color: rgb(211, 231, 112);
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5)
+}
+
+@font-face {
+    font-family: 'lucky';
+    src: url('img/5.Font/luckiestGuy-regular.ttf');
+}
+
+@media only screen and (max-width: 760px) {
+    canvas{
+        width: 100%;
+    }
+
+    
+    
+}
+
+@media only screen and (max-height: 480px) {
+    canvas{
+        height: 100vh;
+    }
+    h1{
+        display: none;
+    }
+}
+

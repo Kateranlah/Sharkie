@@ -9,7 +9,8 @@ const level1 = new Level(
     new Coin(), new Coin(),new Coin(), new Coin(), new Coin(),
     new Coin(), new Coin(), new Coin(),new Coin(), new Coin()
   ],
-  [new Light()],
+  [//new Light(1600,480)
+  ],
   [
     new BackgroundObject("img/3. Background/Layers/5. Water/L2.png", -719),
     new BackgroundObject("img/3. Background/Layers/3.Fondo 1/L2.png", -719),
@@ -39,6 +40,8 @@ const level1 = new Level(
   ],
   [
     new WallBarrier(60, 480), 
+    new GroundBarrier(2250, 180 , 340, 500), 
+    new WallBarrier(2750, 480),
   ]
   
 );

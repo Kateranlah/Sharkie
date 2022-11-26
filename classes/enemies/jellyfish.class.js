@@ -48,6 +48,7 @@ IMAGES_DEAD_PURPLE = ['img/2.Enemy/2 Jelly fish/Dead/Lila/L1.png',
           if (!this.dead) {
             this.playAnimation(this.IMAGES_MOVING_PURPLE);
             if (this.y > 100 && !this.swimUpDone) {
+           
               this.moveUp();
          }else if(this.y <= 100 && !this.swimUpDone){
              this.swimUpDone = true;
@@ -60,7 +61,8 @@ IMAGES_DEAD_PURPLE = ['img/2.Enemy/2 Jelly fish/Dead/Lila/L1.png',
           
         }else{
             this.playAnimation(this.IMAGES_DEAD_PURPLE);
-            this.moveUp();
+            this.speed = 20
+            this.moveUp();   
         }
         }, 200);
 

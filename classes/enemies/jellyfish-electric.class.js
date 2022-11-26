@@ -63,6 +63,7 @@ class JellyfishElectric extends MovableObject {
        
       } else {
         this.playAnimation(this.IMAGES_DEAD_PINK);
+        this.speed = 20
         this.moveUp();
       }
     }, 200);
