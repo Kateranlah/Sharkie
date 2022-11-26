@@ -104,13 +104,13 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
 
     this.addObjectsToMap(this.level.lights);
-    this.addObjectsToMap(this.level.enemies);
+ 
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.barriers);
     this.addObjectsToMap(this.bubbles);
 
     this.addObjectsToMap(this.level.collectables);
-
+   this.addObjectsToMap(this.level.enemies);
     this.ctx.translate(-this.camera_x, 0);
 
     // ------------- Space for fixed objects ------------- //

@@ -10,10 +10,10 @@ class Poisen extends Collectables{
     "img/4. Marcadores/Posión/Animada/8.png"]
 
 
-    constructor(){
+    constructor(x, y){
         super().loadImages(this.IMAGES)
-        this.x += 200 + Math.random() * 1500;
-        this.y = 380;
+        this.x = x
+        this.y = y
         this.animate(this.IMAGES);
     }
 
