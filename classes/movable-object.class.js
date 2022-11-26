@@ -129,7 +129,7 @@ class MovableObject extends DrawableObject {
    
 
 
-if (enemy instanceof Endboss && !world.character.hitEndboss) {
+if (enemy instanceof Endboss && !world.character.hitEndboss && this.coinsCollected < 20) {
 
     this.energy -= 40;
 

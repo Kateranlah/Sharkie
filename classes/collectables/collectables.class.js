@@ -35,7 +35,7 @@ class Collectables extends MovableObject {
         else
         if (element instanceof Hearts && element == item ){
 
-            this.hearts.heal();
+            this.heal();
             this.remove(i)
             i++;
         }
@@ -56,7 +56,7 @@ class Collectables extends MovableObject {
   }
 
   heal() {
-    world.character.energy += 75;
+    world.character.energy += 80;
     if (world.character.energy > 100) {
       world.character.energy = 100;
     }
