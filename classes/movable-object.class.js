@@ -115,7 +115,7 @@ class MovableObject extends DrawableObject {
   }
 
   checkWhatHit(enemy, dead) {
-    if (enemy instanceof JellyfishElectric) {
+    if (!enemy.dead && enemy instanceof JellyfishElectric) {
       this.electric = true;
       this.setLastMove();
       this.energy -= 10;
@@ -129,7 +129,7 @@ class MovableObject extends DrawableObject {
    
 
 
-if (enemy instanceof Endboss && !world.character.hitEndboss && this.coinsCollected < 20) {
+if (!enemy.dead &&enemy instanceof Endboss && !world.character.hitEndboss && this.coinsCollected < 20) {
 
     this.energy -= 40;
 
@@ -139,7 +139,9 @@ if (enemy instanceof Endboss && !world.character.hitEndboss && this.coinsCollect
   
 
 
-    if (enemy instanceof Jellyfish || enemy instanceof Endboss) {
+    if (!enemy.dead && enemy instanceof Jellyfish  || enemy instanceof Endboss) {
+
+      
       this.poisen = true;
       this.setLastMove();
       this.energy -= 5;
