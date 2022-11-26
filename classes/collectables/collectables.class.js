@@ -30,6 +30,7 @@ class Collectables extends MovableObject {
         this.remove(i)
         world.character.coinsCollected++;
         world.coinBar.setPercentage(world.character.coinsCollected, 'coin');
+       
         i++;
        }
         else
@@ -60,6 +61,6 @@ class Collectables extends MovableObject {
     if (world.character.energy > 100) {
       world.character.energy = 100;
     }
-    world.healthBar.setPercentage(world.character.energy)
+    world.healthBar.setPercentage(world.character.energy, 'heart')
   }
 }
