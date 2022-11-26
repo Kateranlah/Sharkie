@@ -1,9 +1,11 @@
 class Hearts extends Collectables{
 
-    constructor(){
+    constructor(x, y){
         super();
         this.loadImage("img/4. Marcadores/green/100_  copia 3.png")
-        this.x = 200 + Math.random() * 500;
-        this.y = 400;
+        this.x = x;
+        this.y = y;
     }
+
+   
 }

@@ -13,7 +13,7 @@ const level1 = new Level(
     new Poisen(850 , 350),
     new Poisen(2200, 430),
     new Poisen(2700, 40),
-    new Hearts(),
+    new Hearts(2500, 250),
 
    // Middle of Map Ship shape
 

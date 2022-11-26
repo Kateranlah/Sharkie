@@ -11,11 +11,14 @@ class Collectables extends MovableObject {
 
   constructor() {
     super();
+
+
   }
 
   animate(img) {
     setInterval(() => {
       this.playAnimation(img);
+     
     }, 200);
   }
 
@@ -31,7 +34,8 @@ class Collectables extends MovableObject {
        }
         else
         if (element instanceof Hearts && element == item ){
-            this.heal();
+
+            this.hearts.heal();
             this.remove(i)
             i++;
         }
@@ -52,7 +56,7 @@ class Collectables extends MovableObject {
   }
 
   heal() {
-    world.character.energy += 40;
+    world.character.energy += 75;
     if (world.character.energy > 100) {
       world.character.energy = 100;
     }
