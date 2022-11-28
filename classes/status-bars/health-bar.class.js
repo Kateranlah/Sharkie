@@ -27,6 +27,7 @@ percentage = 100;
         this.loadImages(this.IMAGES);
         this.loadImages(this.IMAGES_STRONG);
         this.setPercentage(100);
+      
        
     }
 
