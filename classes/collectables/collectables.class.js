@@ -18,7 +18,7 @@ class Collectables extends MovableObject {
   animate(img) {
     setInterval(() => {
       this.playAnimation(img);
-     
+
     }, 200);
   }
 
@@ -30,7 +30,16 @@ class Collectables extends MovableObject {
         this.remove(i)
         world.character.coinsCollected++;
         world.coinBar.setPercentage(world.character.coinsCollected, 'coin');
-       
+    
+        if(world.character.coinsCollected == 20)
+        {
+        world.healthBar.IMAGES = ["img/4. Marcadores/Purple/0_ .png",
+        "img/4. Marcadores/Purple/20 heart.png",
+        "img/4. Marcadores/Purple/40_ .png",
+        "img/4. Marcadores/Purple/60_ .png",
+        "img/4. Marcadores/Purple/80_ .png",
+        "img/4. Marcadores/Purple/100_ .png"]
+      }
         i++;
        }
         else
@@ -62,5 +71,6 @@ class Collectables extends MovableObject {
       world.character.energy = 100;
     }
     world.healthBar.setPercentage(world.character.energy, 'heart')
+    
   }
 }

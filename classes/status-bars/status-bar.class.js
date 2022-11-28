@@ -1,7 +1,7 @@
 class StatusBar extends DrawableObject {
   width = 150;
   height = 45;
-  coinBarFull = false;
+
 
 
   constructor() {
@@ -41,6 +41,13 @@ tryout(){
     }
 
     if (this.percentage == 100) { 
+
+        if (type == 'coin') {
+            setTimeout(() => {
+              world.healthBar.setPercentage(world.character.energy);  
+            }, 500);
+            
+        }
         
     
       return 5;
@@ -60,16 +67,11 @@ tryout(){
 
   setPercentage(percentage, type) {
 
-    if(this.coinBarFull && type == undefined){
 
-        this.percentage = percentage;
-        let path = this.IMAGES[this.resolveImageIndex(type)];
-        this.img = this.imageCache[path];
-    }else{
     this.percentage = percentage;
     let path = this.IMAGES[this.resolveImageIndex(type)];
     this.img = this.imageCache[path]; 
-    }
+    
    
   }
 
