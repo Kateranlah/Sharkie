@@ -93,7 +93,8 @@ const level1 = new Level(
       // Add Barriers//
   [
     new WallBarrier(-500, 480),
-    //new CaveBarrier(1200),
+    new CaveBarrierUp(1400),
+    new CaveBarrierDown(1400),
     new WallBarrier(2750, 480),
     new GroundBarrier(2650, 180, 340, 500),
     new GroundBarrier(2250, 180, 340, 500),
