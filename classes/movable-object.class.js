@@ -36,12 +36,12 @@ class MovableObject extends DrawableObject {
   moveLeft() {
     this.otherDirection = true;
     this.x -= this.speed;
-    this.world.camera_x = -this.x + 200;
+    
   }
   moveRight() {
     this.otherDirection = false;
     this.x += this.speed;
-    this.world.camera_x = -this.x + 200;
+    
   }
 
   // playAnimation(images) {

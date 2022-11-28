@@ -1,7 +1,7 @@
 class Endboss extends MovableObject {
   height = 250;
   width = 600;
-  speed = 0.15;
+  speed = 12;
   firstAppearance = 0;
   dieing = 0;
   offset = {
@@ -10,6 +10,8 @@ class Endboss extends MovableObject {
     width: -100,
     height: -180,
   };
+  lastMove;
+  attack = false;
   IMAGES_INTRODUCE = [
     "img/2.Enemy/3 Final Enemy/1.Introduce/1.png",
     "img/2.Enemy/3 Final Enemy/1.Introduce/2.png",
@@ -69,6 +71,7 @@ class Endboss extends MovableObject {
     this.x = 2200;
     this.y = 0;
     this.energy = 100;
+    this.otherDirection = true;
 
     setTimeout(() => {
        this.animate();
@@ -91,10 +94,57 @@ class Endboss extends MovableObject {
               world.character.hitEndboss = false;
             }, 500);
           } else if (this.energy > 0) {
-            this.playAnimation(this.IMAGES_FLOATING);
+            if (this.attack) {
+              this.playAnimation(this.IMAGES_ATTACK);
+            }else{
+            
+            this.playAnimation(this.IMAGES_FLOATING);}
           }
         }
       }
-    }, 250);
+
+
+
+     
+
+    if (world.character.x > 1600 && this.attack) {
+    
+      if(this.y < 110){
+        this.moveDown()
+      }
+      if (this.x > 1200) {
+         this.moveLeft()  
+      }
+      
+    } else
+    if (!this.attack) {
+    
+      if(this.y > 0){
+        this.moveUp()
+      }
+      if (this.x < 2200) {
+         this.moveRight()  
+      }
+
+    }
+
+    }, 200);
+
+    setInterval(() => {
+    this.switchMode()
+    console.log('stiwtched');
+    }, 6000);
+  }
+
+
+  switchMode(){
+
+    if(this.attack)
+    {this. attack = false}else
+    if(!this.attack){
+      this. attack = true
+    }
+    
+
   }
 }

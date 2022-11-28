@@ -204,15 +204,18 @@ class Character extends MovableObject {
           this.world.keyboard.RIGHT &&
           this.x < this.world.level.level_end_x &&
           !this.barrierBlockRight
+         
         ) {
+          this.world.camera_x = -this.x + 200;
           this.barrierBlockLeft = false;
           this.moveRight();
-
+         
           this.setLastMove();
         }
         if (this.world.keyboard.LEFT && this.x > -450 && !this.barrierBlockLeft) {
           this.barrierBlockRight = false;
           this.moveLeft();
+          this.world.camera_x = -this.x + 200;
           this.setLastMove();
         }
 
