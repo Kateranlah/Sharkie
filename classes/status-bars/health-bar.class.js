@@ -31,8 +31,11 @@ percentage = 100;
        
     }
 
-    checkPathChange() {
-  
+    checkPathChange() 
+    
+    // {
+    //     world.healthBar.setPercentage(world.character.energy, 'heart')
+    // }
         if (this.coinBarFull){
             this.IMAGES = [
 

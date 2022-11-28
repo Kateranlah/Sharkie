@@ -63,6 +63,17 @@ class Character extends MovableObject {
     "img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png",
   ];
 
+  IMAGES_BUBBLE_MISSING = [
+    "img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/1.png",
+    "img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/2.png",
+    "img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/3.png",
+    "img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/4.png",
+    "img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/5.png",
+    "img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/6.png",
+    "img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/7.png",
+
+  ];
+
   IMAGES_SLEEP = [
     "img/1.Sharkie/2.Long_IDLE/i11.png",
     "img/1.Sharkie/2.Long_IDLE/i12.png",
@@ -159,6 +170,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_SLEEP);
     this.loadImages(this.IMAGES_BUBBLE);
     this.loadImages(this.IMAGES_BUBBLE_POISEN);
+    this.loadImages(this.IMAGES_BUBBLE_MISSING);
     this.loadImages(this.IMAGES_HURT_SHOCK);
     this.loadImages(this.IMAGES_DIE_SHOCK);
 
@@ -257,8 +269,19 @@ class Character extends MovableObject {
         !this.madeRecentBubble &&
         !this.isDead() &&
         !this.isHurt()
+        
       ) {
-        this.playAnimation(this.IMAGES_BUBBLE_POISEN, this.playOnes);
+
+        if(this.poisenCollected > 0){
+
+            this.playAnimation(this.IMAGES_BUBBLE_POISEN, this.playOnes);
+        }else{
+             this.playAnimation(this.IMAGES_BUBBLE_MISSING , this.playOnes);
+        }
+      
+     
+        
+     
       } else if (
         (!this.isDead() && this.world.keyboard.UP) ||
         this.world.keyboard.RIGHT ||
@@ -302,15 +325,19 @@ class Character extends MovableObject {
 
   
   blowPoisenBubble() {
- 
+    if(this.poisenCollected > 0){
+      this.poisenCollected--
     if (!this.madeRecentBubble && !this.isHurt()) {
        let bubble = new PoisenBubble(
      
       );
-      this.world.creatBubble(bubble);
+      this.world.creatBubble(bubble); 
+      world.poisenBar.setPercentage(world.character.poisenCollected, 'poisen');
+
      
     }
   }
+}
 
   isLongIdle() {
     let timePassed = new Date().getTime() - this.lastMove;

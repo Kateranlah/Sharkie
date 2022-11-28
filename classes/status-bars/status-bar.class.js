@@ -6,7 +6,7 @@ class StatusBar extends DrawableObject {
 
   constructor() {
     super();
-   console.log(this);
+
     this.tryout()
   }
 
@@ -18,7 +18,7 @@ tryout(){
 
     setTimeout(() => {
           this.healthBar = this
-          console.log(this.healthBar);
+     
 
     }, 200);
     
@@ -61,12 +61,11 @@ tryout(){
   setPercentage(percentage, type) {
 
     if(this.coinBarFull && type == undefined){
-        console.log('drom');
+
         this.percentage = percentage;
         let path = this.IMAGES[this.resolveImageIndex(type)];
         this.img = this.imageCache[path];
     }else{
-    console.log(this.coinBarFull);
     this.percentage = percentage;
     let path = this.IMAGES[this.resolveImageIndex(type)];
     this.img = this.imageCache[path]; 
