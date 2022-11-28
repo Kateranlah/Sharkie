@@ -12,6 +12,7 @@ class World {
   bubbles = [];
   barriers = new Barriers();
 
+
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;

@@ -2,30 +2,34 @@ class StatusBar extends DrawableObject {
   width = 150;
   height = 45;
   coinBarFull = false;
-  healthBar;
+
 
   constructor() {
     super();
-  
-    // this.tryout()
+   console.log(this);
+    this.tryout()
   }
 
-// tryout(){
-//     if(this instanceof HealthBar){
+tryout(){
+    if(this instanceof HealthBar){
 
 
-//     this.healthBar = this
+  
 
+    setTimeout(() => {
+          this.healthBar = this
+          console.log(this.healthBar);
+
+    }, 200);
     
-    
-// console.log(this.healthBar);
+
            
    
 
-//     }
+    }
 
 
-// }
+}
 
 
   resolveImageIndex(type) {
@@ -36,14 +40,9 @@ class StatusBar extends DrawableObject {
       this.percentage *= 25;
     }
 
-    if (this.percentage == 100) {
-        if (type == "coin") {
-            this.coinBarFull = true;
-            // console.log(this.healthBar);
-            // this.healthBar.setPercentage(this.healthBar.percentage)
-          
-        }
-          
+    if (this.percentage == 100) { 
+        
+    
       return 5;
     } else if (this.percentage > 80) {
       return 4;
@@ -52,6 +51,7 @@ class StatusBar extends DrawableObject {
     } else if (this.percentage > 40) {
       return 2;
     } else if (this.percentage > 20) {
+ 
       return 1;
     } else {
       return 0;
@@ -59,10 +59,19 @@ class StatusBar extends DrawableObject {
   }
 
   setPercentage(percentage, type) {
-    // console.log(this.healthBar);
+
+    if(this.coinBarFull && type == undefined){
+        console.log('drom');
+        this.percentage = percentage;
+        let path = this.IMAGES[this.resolveImageIndex(type)];
+        this.img = this.imageCache[path];
+    }else{
+    console.log(this.coinBarFull);
     this.percentage = percentage;
     let path = this.IMAGES[this.resolveImageIndex(type)];
-    this.img = this.imageCache[path];
+    this.img = this.imageCache[path]; 
+    }
+   
   }
 
   
