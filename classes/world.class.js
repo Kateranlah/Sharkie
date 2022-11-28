@@ -94,7 +94,9 @@ class World {
               console.log(e, enemy);
             } else if (enemy instanceof Endboss && b instanceof PoisenBubble)
             {
-              enemy.energy -= 33
+              enemy.energy -= 40
+              enemy.attack = false
+              world.character.hitEndboss = true
             }
           }
           i++;

@@ -44,6 +44,8 @@ class MovableObject extends DrawableObject {
     
   }
 
+
+
   // playAnimation(images) {
 
   //     this.doneWithAnimation = false
@@ -87,7 +89,7 @@ class MovableObject extends DrawableObject {
       
       if (this.energy > 0 && !this.hitEndboss) {
         this.hitEndboss = true
-        enemy.energy -=25;
+        enemy.energy -=15;
        }
 
        

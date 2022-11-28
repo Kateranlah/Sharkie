@@ -80,6 +80,7 @@ class Endboss extends MovableObject {
   }
   animate() {
     setInterval(() => {
+
       if (world.character.x > 1800) {
         if (this.firstAppearance <= this.IMAGES_INTRODUCE.length - 1) {
           this.playAnimation(this.IMAGES_INTRODUCE);
@@ -88,13 +89,14 @@ class Endboss extends MovableObject {
           if (this.energy <= 0 && this.dieing <= this.IMAGES_DEAD.length - 1) {
             this.playAnimation(this.IMAGES_DEAD, this.playOnes);
             this.dieing++;
-          } else if (world.character.hitEndboss) {
+          } else if (world.character.hitEndboss && this.energy > 0) {
             this.playAnimation(this.IMAGES_HURT, this.playOnes);
+            this.attack = false
             setInterval(() => {
               world.character.hitEndboss = false;
             }, 500);
           } else if (this.energy > 0) {
-            if (this.attack) {
+            if (this.attack && !world.character.hitEndboss) {
               this.playAnimation(this.IMAGES_ATTACK);
             }else{
             
@@ -107,7 +109,7 @@ class Endboss extends MovableObject {
 
      
 
-    if (world.character.x > 1600 && this.attack) {
+    if (world.character.x > 1600 && this.attack && this.energy > 0) {
     
       if(this.y < 110){
         this.moveDown()
@@ -117,13 +119,16 @@ class Endboss extends MovableObject {
       }
       
     } else
-    if (!this.attack) {
+    if (!this.attack && this.energy > 0) {
     
       if(this.y > 0){
         this.moveUp()
       }
       if (this.x < 2200) {
          this.moveRight()  
+      }
+      if(this.x == 2200){
+        this.otherDirection = false;
       }
 
     }
@@ -132,8 +137,7 @@ class Endboss extends MovableObject {
 
     setInterval(() => {
     this.switchMode()
-    console.log('stiwtched');
-    }, 6000);
+    }, 7000);
   }
 
 
@@ -146,5 +150,16 @@ class Endboss extends MovableObject {
     }
     
 
+  }
+
+  moveLeft() {
+    this.otherDirection = false;
+    this.x -= this.speed;
+    
+  }
+  moveRight() {
+    this.otherDirection = true;
+    this.x += this.speed;
+    
   }
 }
