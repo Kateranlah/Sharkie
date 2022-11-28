@@ -70,7 +70,10 @@ class Endboss extends MovableObject {
     this.y = 0;
     this.energy = 100;
 
-    this.animate();
+    setTimeout(() => {
+       this.animate();
+    }, 1000);
+   
   }
   animate() {
     setInterval(() => {

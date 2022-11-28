@@ -73,6 +73,8 @@ class World {
   checkCollisions() {
     let e = 0;
     this.level.enemies.forEach((enemy) => {
+     
+  
       if (this.character.isColliding(enemy)) {
         this.character.hit(enemy);
         this.healthBar.setPercentage(this.character.energy);
@@ -90,6 +92,9 @@ class World {
               this.level.enemies[e].dead = true;
 
               console.log(e, enemy);
+            } else if (enemy instanceof Endboss && b instanceof PoisenBubble)
+            {
+              enemy.energy -= 33
             }
           }
           i++;
