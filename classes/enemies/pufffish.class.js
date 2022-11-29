@@ -2,11 +2,12 @@ class Pufffish extends MovableObject {
   height = 120;
   width = 70;
   speed = 5;
+  
   offset = {
     x: 15,
-    y: 20,
+    y: 30,
     width: -30,
-    height: -30,
+    height: -70,
   };
 
   IMAGES_MOVING_GREEN = [
