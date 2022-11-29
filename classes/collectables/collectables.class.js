@@ -11,57 +11,39 @@ class Collectables extends MovableObject {
 
   constructor() {
     super();
-
-
   }
 
   animate(img) {
     setInterval(() => {
       this.playAnimation(img);
-
     }, 200);
   }
 
   collect(item) {
     let i = 0;
     world.level.collectables.forEach((element) => {
-        
-      if (element instanceof Coin && element == item ) {
-        this.remove(i)
-        world.character.coinsCollected++;
-        world.coinBar.setPercentage(world.character.coinsCollected, 'coin');
-    
-        if(world.character.coinsCollected == 20)
-        {
-        world.healthBar.IMAGES = ["img/4. Marcadores/Purple/0_ .png",
-        "img/4. Marcadores/Purple/20 heart.png",
-        "img/4. Marcadores/Purple/40_ .png",
-        "img/4. Marcadores/Purple/60_ .png",
-        "img/4. Marcadores/Purple/80_ .png",
-        "img/4. Marcadores/Purple/100_ .png"]
-      }
+      if (element instanceof Coin && element == item) {
+        this.remove(i);
+        this.increaseOwnCoins();
+        if (this.collectedAllCoins()) {
+          this.changeHealthbarColor();
+        }
         i++;
-       }
-        else
-        if (element instanceof Hearts && element == item ){
-
-            this.heal();
-            this.remove(i)
-            i++;
-        }
-        else
-        if (element instanceof Poisen && element == item ){
-            this.remove(i)
-            world.character.poisenCollected++;
-            world.poisenBar.setPercentage(world.character.poisenCollected, 'poisen');
-            i++;
-        }else{
-            i++;
-        }
+      } else if (element instanceof Hearts && element == item) {
+        this.heal();
+        this.remove(i);
+        i++;
+      } else if (element instanceof Poisen && element == item) {
+        this.remove(i);
+        this.increaseOwnPoisen();
+        i++;
+      } else {
+        i++;
+      }
     });
   }
 
-  remove(i){
+  remove(i) {
     world.level.collectables.splice(i, 1);
   }
 
@@ -70,7 +52,31 @@ class Collectables extends MovableObject {
     if (world.character.energy > 100) {
       world.character.energy = 100;
     }
-    world.healthBar.setPercentage(world.character.energy, 'heart')
-    
+    world.healthBar.setPercentage(world.character.energy, "heart");
+  }
+
+  increaseOwnCoins() {
+    world.character.coinsCollected++;
+    world.coinBar.setPercentage(world.character.coinsCollected, "coin");
+  }
+
+  increaseOwnPoisen() {
+    world.character.poisenCollected++;
+    world.poisenBar.setPercentage(world.character.poisenCollected, "poisen");
+  }
+
+  collectedAllCoins() {
+    return world.character.coinsCollected == 20;
+  }
+
+  changeHealthbarColor() {
+    world.healthBar.IMAGES = [
+      "img/4. Marcadores/Purple/0_ .png",
+      "img/4. Marcadores/Purple/20 heart.png",
+      "img/4. Marcadores/Purple/40_ .png",
+      "img/4. Marcadores/Purple/60_ .png",
+      "img/4. Marcadores/Purple/80_ .png",
+      "img/4. Marcadores/Purple/100_ .png",
+    ];
   }
 }
