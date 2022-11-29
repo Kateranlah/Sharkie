@@ -20,9 +20,9 @@ class Bubbles extends MovableObject {
 
   makeBubble() {
     if (!world.character.otherDirection) {
-      this.x = world.character.x + 160;
+      this.makesBubleOnRightSide();
     } else {
-      this.x = world.character.x;
+      this.makesBubleOnLeftSide();
     }
     this.y = world.character.y + 100;
     this.speedY;
@@ -43,22 +43,20 @@ class Bubbles extends MovableObject {
     setInterval(() => {
       if (this.firstApperance) {
         if (!world.character.otherDirection) {
-          this.x += 10;
+          this.shootRightDirection();
         } else {
-          this.x -= 10;
+          this.shootLeftDirection();
         }
 
         setTimeout(() => {
           this.firstApperance = false;
         }, 500);
       }
-      if (this.driftedX < 5 && !this.fullCicle) {
-        this.x += 3;
-        this.driftedX += 1;
+      if (this.driftedRightDone()) {
+        this.driftRight();
         this.checkCicle();
       } else if (this.fullCicle) {
-        this.x -= 2;
-        this.driftedX -= 1;
+        this.driftLeft();
         this.checkCicle();
       }
     }, 1000 / 25);
@@ -74,5 +72,33 @@ class Bubbles extends MovableObject {
 
   isUnderWater() {
     return this.y < 0;
+  }
+
+  makesBubleOnRightSide() {
+    return (this.x = world.character.x + 160);
+  }
+  makesBubleOnLeftSide() {
+    return (this.x = world.character.x);
+  }
+
+  shootRightDirection() {
+    this.x += 10;
+  }
+
+  shootLeftDirection() {
+    this.x -= 10;
+  }
+
+  driftedRightDone() {
+    return this.driftedX < 5 && !this.fullCicle;
+  }
+
+  driftRight() {
+    this.x += 3;
+    this.driftedX += 1;
+  }
+  driftLeft() {
+    this.x -= 2;
+    this.driftedX -= 1;
   }
 }

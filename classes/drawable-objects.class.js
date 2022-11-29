@@ -38,6 +38,7 @@ class DrawableObject{
       this instanceof Jellyfish ||
       this instanceof JellyfishElectric ||
       this instanceof Barriers ||
+      this instanceof Pufffish ||
       this instanceof Endboss
     ) {
       ctx.beginPath();

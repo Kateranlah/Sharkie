@@ -71,7 +71,6 @@ class Character extends MovableObject {
     "img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/5.png",
     "img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/6.png",
     "img/1.Sharkie/4.Attack/Bubble trap/Op2 (Without Bubbles)/7.png",
-
   ];
 
   IMAGES_SLEEP = [
@@ -204,17 +203,20 @@ class Character extends MovableObject {
           this.world.keyboard.RIGHT &&
           this.x < this.world.level.level_end_x &&
           !this.barrierBlockRight
-         
         ) {
           this.world.camera_x = -this.x + 200;
           this.barrierBlockLeft = false;
-          this.moveRight('right');
-         
+          this.moveRight("right");
+
           this.setLastMove();
         }
-        if (this.world.keyboard.LEFT && this.x > -450 && !this.barrierBlockLeft) {
+        if (
+          this.world.keyboard.LEFT &&
+          this.x > -450 &&
+          !this.barrierBlockLeft
+        ) {
           this.barrierBlockRight = false;
-          this.moveLeft('right');
+          this.moveLeft("right");
           this.world.camera_x = -this.x + 200;
           this.setLastMove();
         }
@@ -272,19 +274,12 @@ class Character extends MovableObject {
         !this.madeRecentBubble &&
         !this.isDead() &&
         !this.isHurt()
-        
       ) {
-
-        if(this.poisenCollected > 0){
-
-            this.playAnimation(this.IMAGES_BUBBLE_POISEN, this.playOnes);
-        }else{
-             this.playAnimation(this.IMAGES_BUBBLE_MISSING , this.playOnes);
+        if (this.poisenCollected > 0) {
+          this.playAnimation(this.IMAGES_BUBBLE_POISEN, this.playOnes);
+        } else {
+          this.playAnimation(this.IMAGES_BUBBLE_MISSING, this.playOnes);
         }
-      
-     
-        
-     
       } else if (
         (!this.isDead() && this.world.keyboard.UP) ||
         this.world.keyboard.RIGHT ||
@@ -314,33 +309,26 @@ class Character extends MovableObject {
     }, 500);
   }
 
-  
   blowBubble() {
-
     if (!this.madeRecentBubble && !this.isHurt()) {
-       let bubble = new StandartBubble(
-       
-      );
-      this.world.creatBubble(bubble);;
-     
-  }
-  }
-
-  
-  blowPoisenBubble() {
-    if(this.poisenCollected > 0){
-      this.poisenCollected--
-    if (!this.madeRecentBubble && !this.isHurt()) {
-       let bubble = new PoisenBubble(
-     
-      );
-      this.world.creatBubble(bubble); 
-      world.poisenBar.setPercentage(world.character.poisenCollected, 'poisen');
-
-     
+      let bubble = new StandartBubble();
+      this.world.creatBubble(bubble);
     }
   }
-}
+
+  blowPoisenBubble() {
+    if (this.poisenCollected > 0) {
+      this.poisenCollected--;
+      if (!this.madeRecentBubble && !this.isHurt()) {
+        let bubble = new PoisenBubble();
+        this.world.creatBubble(bubble);
+        world.poisenBar.setPercentage(
+          world.character.poisenCollected,
+          "poisen"
+        );
+      }
+    }
+  }
 
   isLongIdle() {
     let timePassed = new Date().getTime() - this.lastMove;
