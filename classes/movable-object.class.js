@@ -7,8 +7,8 @@ class MovableObject extends DrawableObject {
   startWithAnimation = false;
   playOnes = true;
   swimUpDone = false;
+  swimRightDone = false;
   hitEndboss = false;
-
 
   constructor() {
     super();
@@ -36,15 +36,11 @@ class MovableObject extends DrawableObject {
   moveLeft() {
     this.otherDirection = true;
     this.x -= this.speed;
-    
   }
   moveRight() {
     this.otherDirection = false;
     this.x += this.speed;
-    
   }
-
-
 
   // playAnimation(images) {
 
@@ -85,27 +81,19 @@ class MovableObject extends DrawableObject {
   }
 
   hit(enemy) {
-    if(!this.isHurt() && this.slapping && enemy instanceof Endboss){
-      
+    if (!this.isHurt() && this.slapping && enemy instanceof Endboss) {
       if (this.energy > 0 && !this.hitEndboss) {
-        this.hitEndboss = true
-        enemy.energy -=15;
-       }
-
-       
-      
+        this.hitEndboss = true;
+        enemy.energy -= 15;
+      }
     }
-
-
 
     if (!this.isHurt() && !this.slapping) {
       this.checkWhatHit(enemy);
 
-      
       if (this.energy <= 0) {
         this.checkWhatHit(enemy, true);
         this.energy = 0;
-       
       } else {
         this.lastHit = new Date().getTime();
       }
@@ -120,7 +108,7 @@ class MovableObject extends DrawableObject {
     if (!enemy.dead && enemy instanceof JellyfishElectric) {
       this.electric = true;
       this.setLastMove();
-      this.energy -= 10;
+      this.energy -= 20;
       if (!dead) {
         setTimeout(() => {
           this.electric = false;
@@ -128,22 +116,19 @@ class MovableObject extends DrawableObject {
       }
     }
 
-   
+    if (
+      !enemy.dead &&
+      enemy instanceof Endboss &&
+      !world.character.hitEndboss &&
+      this.coinsCollected < 20
+    ) {
+      this.energy -= 40;
+    }
 
-
-if (!enemy.dead &&enemy instanceof Endboss && !world.character.hitEndboss && this.coinsCollected < 20) {
-
-    this.energy -= 40;
-
-  }
- 
-    
-  
-
-
-    if (!enemy.dead && enemy instanceof Jellyfish  || enemy instanceof Endboss) {
-
-      
+    if (
+      !enemy.dead && enemy instanceof Jellyfish ||
+      enemy instanceof Endboss || enemy instanceof Pufffish
+    ) {
       this.poisen = true;
       this.setLastMove();
       this.energy -= 5;
@@ -154,7 +139,6 @@ if (!enemy.dead &&enemy instanceof Endboss && !world.character.hitEndboss && thi
       }
     }
   }
-
 
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;

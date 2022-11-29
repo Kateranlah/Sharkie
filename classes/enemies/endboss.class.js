@@ -75,7 +75,7 @@ class Endboss extends MovableObject {
 
     setTimeout(() => {
        this.animate();
-    }, 1000);
+    }, 2000);
    
   }
   animate() {

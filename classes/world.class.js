@@ -74,7 +74,11 @@ class World {
     let e = 0;
     this.level.enemies.forEach((enemy) => {
      
-  
+      if (enemy instanceof Pufffish && this.character.slapping && this.character.isColliding(enemy)) {
+        console.log(enemy)
+        console.log(e);
+        this.level.enemies[e].dead = true;
+       }
       if (this.character.isColliding(enemy)) {
         this.character.hit(enemy);
         this.healthBar.setPercentage(this.character.energy);
@@ -89,9 +93,10 @@ class World {
               enemy instanceof JellyfishElectric ||
               enemy instanceof Jellyfish
             ) {
+         
               this.level.enemies[e].dead = true;
 
-              console.log(e, enemy);
+            
             } else if (enemy instanceof Endboss && b instanceof PoisenBubble)
             {
               enemy.energy -= 40

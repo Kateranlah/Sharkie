@@ -5,6 +5,9 @@ const level1 = new Level(
     new Jellyfish(650),
     new Jellyfish(1050),
     new JellyfishElectric(850),
+    new Pufffish(600, 150),
+    new Pufffish(-200, 240),
+    new Pufffish(1800, 190),
     new Endboss(),
   ],
   // Add Collectables //
