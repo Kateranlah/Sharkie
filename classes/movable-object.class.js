@@ -42,39 +42,26 @@ class MovableObject extends DrawableObject {
     this.x += this.speed;
   }
 
-  // playAnimation(images) {
-
-  //     this.doneWithAnimation = false
-  //     let i = this.currentImage % images.length;
-  //     let path = images[i];
-  //     this.img = this.imageCache[path];
-  //     this.currentImage++;
-  //     this.doneWithAnimation = true
-
-  // }
-
   playAnimation(images, ones) {
     if (ones && !this.doneWithAnimation) {
       if (!this.startWithAnimation) {
-        // Setting currentImage just once
-        this.currentImage = 0; // If it's an one time animation, it should start with the  first img
+        this.currentImage = 0;
       }
 
       this.startWithAnimation = true;
-      let i = this.currentImage % images.length; // (0 % 3 = 0), (1 % 3 = 1), (2 % 3 = 2), (3 % 3 = 0), (4 % 3 = 1), (5 % 3 = 2), (6 % 3 = 0), (7 % 3 = 1), (8 % = 2)
-      let path = images[i]; // Temporary store the path of each img
-      this.img = this.imageCache[path]; // Change img from class
+      let i = this.currentImage % images.length;
+      let path = images[i];
+      this.img = this.imageCache[path];
       this.currentImage++;
 
       if (this.currentImage == images.length) {
-        // Stop animation if all images are animated once
         this.doneWithAnimation = true;
         this.startWithAnimation = false;
       }
     } else if (!ones) {
-      let i = this.currentImage % images.length; // (0 % 3 = 0), (1 % 3 = 1), (2 % 3 = 2), (3 % 3 = 0), (4 % 3 = 1), (5 % 3 = 2), (6 % 3 = 0), (7 % 3 = 1), (8 % = 2)
-      let path = images[i]; // Temporary store the path of each img
-      this.img = this.imageCache[path]; // Change img from class
+      let i = this.currentImage % images.length;
+      let path = images[i];
+      this.img = this.imageCache[path];
       this.currentImage++;
       this.doneWithAnimation = false;
     }
@@ -90,7 +77,6 @@ class MovableObject extends DrawableObject {
 
     if (!this.isHurt() && !this.slapping) {
       this.checkWhatHit(enemy);
-
       if (this.energy <= 0) {
         this.checkWhatHit(enemy, true);
         this.energy = 0;
@@ -105,48 +91,69 @@ class MovableObject extends DrawableObject {
   }
 
   checkWhatHit(enemy, dead) {
-    if (!enemy.dead && enemy instanceof JellyfishElectric) {
-      this.electric = true;
-      this.setLastMove();
-      this.energy -= 20;
-      if (!dead) {
-        setTimeout(() => {
-          this.electric = false;
-        }, 500);
-      }
+    if (this.isJellyfishElectric(enemy, dead)) {
+      this.getElectricDmg(dead);
     }
 
-    if (
-      !enemy.dead &&
-      enemy instanceof Endboss &&
-      !world.character.hitEndboss &&
-      this.coinsCollected < 20
-    ) {
+    if (this.isEndboss(enemy) && this.coinsCollected < 20) {
       this.energy -= 40;
     }
 
-    if (
-      !enemy.dead && enemy instanceof Jellyfish ||
-      enemy instanceof Endboss || enemy instanceof Pufffish
-    ) {
-      this.poisen = true;
-      this.setLastMove();
-      this.energy -= 5;
-      if (!dead) {
-        setTimeout(() => {
-          this.poisen = false;
-        }, 500);
-      }
+    if (this.isNoneElectricEnemy(enemy)) {
+      this.getPoisenDmg(dead);
     }
   }
 
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit;
-    timepassed = timepassed / 1000; // from ms to s
+    timepassed = timepassed / 1000;
     return timepassed < 0.5;
   }
 
-  isCloseToCharacter(){
-  return world.character.x - this.x < 220 && world.character.x - this.x > (-300)
+  isCloseToCharacter() {
+    return (
+      world.character.x - this.x < 220 && world.character.x - this.x > -300
+    );
+  }
+
+  isJellyfishElectric(enemy) {
+    return !enemy.dead && enemy instanceof JellyfishElectric;
+  }
+
+  getElectricDmg(dead) {
+    this.electric = true;
+    this.setLastMove();
+    this.energy -= 20;
+    if (!dead) {
+      setTimeout(() => {
+        this.electric = false;
+      }, 500);
+    }
+  }
+
+  isEndboss(enemy){
+    return !enemy.dead &&
+      enemy instanceof Endboss &&
+      !world.character.hitEndboss
+    
+  }
+
+  isNoneElectricEnemy(enemy) {
+    return (
+      (!enemy.dead && enemy instanceof Jellyfish) ||
+      enemy instanceof Endboss ||
+      enemy instanceof Pufffish
+    );
+  }
+
+  getPoisenDmg(dead) {
+    this.poisen = true;
+    this.setLastMove();
+    this.energy -= 5;
+    if (!dead) {
+      setTimeout(() => {
+        this.poisen = false;
+      }, 500);
+    }
   }
 }
