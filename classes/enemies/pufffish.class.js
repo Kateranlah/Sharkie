@@ -57,7 +57,7 @@ class Pufffish extends MovableObject {
 
     this.x = x;
     this.y = y;
-    this.animate();
+    setTimeout(() => this.animate(), 500);
   }
 
   animate() {

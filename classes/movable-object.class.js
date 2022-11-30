@@ -111,9 +111,7 @@ class MovableObject extends DrawableObject {
   }
 
   isCloseToCharacter() {
-    return (
-      world.character.x - this.x < 220 && world.character.x - this.x > -300
-    );
+    return world.character.x - this.x < 220 && world.character.x - this.x > -300
   }
 
   isJellyfishElectric(enemy) {
@@ -131,11 +129,10 @@ class MovableObject extends DrawableObject {
     }
   }
 
-  isEndboss(enemy){
-    return !enemy.dead &&
-      enemy instanceof Endboss &&
-      !world.character.hitEndboss
-    
+  isEndboss(enemy) {
+    return (
+      !enemy.dead && enemy instanceof Endboss && !world.character.hitEndboss
+    );
   }
 
   isNoneElectricEnemy(enemy) {

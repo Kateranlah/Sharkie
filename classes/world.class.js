@@ -12,7 +12,6 @@ class World {
   bubbles = [];
   barriers = new Barriers();
 
-
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -24,7 +23,6 @@ class World {
 
   setWorld() {
     this.character.world = this;
-
   }
 
   run() {
@@ -73,39 +71,15 @@ class World {
   checkCollisions() {
     let e = 0;
     this.level.enemies.forEach((enemy) => {
-     
-      if (enemy instanceof Pufffish && this.character.slapping && this.character.isColliding(enemy)) {
-        console.log(enemy)
-        console.log(e);
+      if (this.isPufferfish(enemy)) {
         this.level.enemies[e].dead = true;
-       }
+      }
       if (this.character.isColliding(enemy)) {
-        this.character.hit(enemy);
-        this.healthBar.setPercentage(this.character.energy);
+        this.isReducingHp(enemy);
       }
 
       if (this.bubbles.length >= 1) {
-        let i = 0;
-        this.bubbles.forEach((b) => {
-          if (this.bubbles[i].isColliding(enemy)) {
-            this.bubbles.splice(i, 1);
-            if (
-              enemy instanceof JellyfishElectric ||
-              enemy instanceof Jellyfish
-            ) {
-         
-              this.level.enemies[e].dead = true;
-
-            
-            } else if (enemy instanceof Endboss && b instanceof PoisenBubble)
-            {
-              enemy.energy -= 40
-              enemy.attack = false
-              world.character.hitEndboss = true
-            }
-          }
-          i++;
-        });
+        this.checkIfBubbleHits();
       }
       e++;
     });
@@ -118,13 +92,13 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
 
     this.addObjectsToMap(this.level.lights);
- 
+
     this.addToMap(this.character);
     this.addObjectsToMap(this.level.barriers);
     this.addObjectsToMap(this.bubbles);
 
     this.addObjectsToMap(this.level.collectables);
-   this.addObjectsToMap(this.level.enemies);
+    this.addObjectsToMap(this.level.enemies);
     this.ctx.translate(-this.camera_x, 0);
 
     // ------------- Space for fixed objects ------------- //
@@ -165,5 +139,43 @@ class World {
   flipImageBack(mo) {
     mo.x = mo.x * -1;
     this.ctx.restore();
+  }
+
+  isPufferfish(enemy) {
+    return (
+      enemy instanceof Pufffish &&
+      this.character.slapping &&
+      this.character.isColliding(enemy)
+    );
+  }
+
+  isReducingHp(enemy) {
+    this.character.hit(enemy);
+    this.healthBar.setPercentage(this.character.energy);
+  }
+
+  checkIfBubbleHits() {
+    let i = 0;
+    this.bubbles.forEach((b) => {
+      if (this.bubbles[i].isColliding(enemy)) {
+        this.removeBubble();
+        if (enemy instanceof JellyfishElectric || enemy instanceof Jellyfish) {
+          this.level.enemies[e].dead = true;
+        } else if (enemy instanceof Endboss && b instanceof PoisenBubble) {
+          this.reduceEndbossHp();
+        }
+      }
+      i++;
+    });
+  }
+
+  removeBubble() {
+    this.bubbles.splice(i, 1);
+  }
+  
+  reduceEndbossHp() {
+    enemy.energy -= 40;
+    enemy.attack = false;
+    world.character.hitEndboss = true;
   }
 }
