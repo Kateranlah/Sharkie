@@ -73,93 +73,120 @@ class Endboss extends MovableObject {
     this.energy = 100;
     this.otherDirection = true;
 
-    setTimeout(() => {
-       this.animate();
-    }, 2000);
-   
+    setTimeout(this.animate(), 2000);
   }
   animate() {
     setInterval(() => {
-
-      if (world.character.x > 1800) {
-        if (this.firstAppearance <= this.IMAGES_INTRODUCE.length - 1) {
-          this.playAnimation(this.IMAGES_INTRODUCE);
-          this.firstAppearance++;
-        } else {
-          if (this.energy <= 0 && this.dieing <= this.IMAGES_DEAD.length - 1) {
-            this.playAnimation(this.IMAGES_DEAD, this.playOnes);
-            this.dieing++;
-          } else if (world.character.hitEndboss && this.energy > 0) {
-            this.playAnimation(this.IMAGES_HURT, this.playOnes);
-            this.attack = false
-            setInterval(() => {
-              world.character.hitEndboss = false;
-            }, 500);
-          } else if (this.energy > 0) {
-            if (this.attack && !world.character.hitEndboss) {
-              this.playAnimation(this.IMAGES_ATTACK);
-            }else{
-            
-            this.playAnimation(this.IMAGES_FLOATING);}
-          }
-        }
-      }
-
-
-
-     
-
-    if (world.character.x > 1600 && this.attack && this.energy > 0) {
-    
-      if(this.y < 110){
-        this.moveDown()
-      }
-      if (this.x > 1200) {
-         this.moveLeft()  
-      }
-      
-    } else
-    if (!this.attack && this.energy > 0) {
-    
-      if(this.y > 0){
-        this.moveUp()
-      }
-      if (this.x < 2200) {
-         this.moveRight()  
-      }
-      if(this.x == 2200){
-        this.otherDirection = false;
-      }
-
-    }
-
+      this.animateBoss();
+      this.bossMovement();
     }, 200);
 
     setInterval(() => {
-    this.switchMode()
+      this.switchAttackMode();
     }, 7000);
   }
 
+  // BOSS MOVEMENT //
 
-  switchMode(){
-
-    if(this.attack)
-    {this. attack = false}else
-    if(!this.attack){
-      this. attack = true
+  bossMovement() {
+    if (this.atBossArea(200) && this.attack && this.energy > 0) {
+      this.attackMovement();
+    } else if (!this.attack && this.energy > 0) {
+      this.retreatMovement();
+      if (this.x == 2200) {
+        this.otherDirection = false;
+      }
     }
-    
+  }
 
+  switchAttackMode() {
+    if (this.attack) {
+      this.attack = false;
+    } else if (!this.attack) {
+      this.attack = true;
+    }
+  }
+
+  attackMovement() {
+    if (this.y < 110) {
+      this.moveDown();
+    }
+    if (this.x > 1200) {
+      this.moveLeft();
+    }
+  }
+
+  retreatMovement() {
+    if (this.y > 0) {
+      this.moveUp();
+    }
+    if (this.x < 2200) {
+      this.moveRight();
+    }
   }
 
   moveLeft() {
     this.otherDirection = false;
     this.x -= this.speed;
-    
   }
   moveRight() {
     this.otherDirection = true;
     this.x += this.speed;
-    
+  }
+
+  atBossArea(distance) {
+    if (distance) {
+      return world.character.x > 1800 - +distance;
+    } else {
+      return world.character.x > 1800;
+    }
+  }
+
+  // ANIMATIONS IMAGES //
+
+  animateBoss() {
+    if (this.atBossArea()) {
+      if (this.introducingImageMissing()) {
+        this.playIntroduceAnimation();
+      } else {
+        if (this.energy <= 0 && this.dieingImageMissing()) {
+          this.playDiengAnimation();
+        } else if (world.character.hitEndboss && this.energy > 0) {
+          this.playHurtAnimation();
+        } else if (this.energy > 0) {
+          if (this.attack && !world.character.hitEndboss) {
+            this.playAnimation(this.IMAGES_ATTACK);
+          } else {
+            this.playAnimation(this.IMAGES_FLOATING);
+          }
+        }
+      }
+    }
+  }
+
+  introducingImageMissing() {
+    return this.firstAppearance <= this.IMAGES_INTRODUCE.length - 1;
+  }
+
+  dieingImageMissing() {
+    return this.dieing <= this.IMAGES_DEAD.length - 1;
+  }
+
+  playIntroduceAnimation() {
+    this.playAnimation(this.IMAGES_INTRODUCE);
+    this.firstAppearance++;
+  }
+
+  playDiengAnimation() {
+    this.playAnimation(this.IMAGES_DEAD, this.playOnes);
+    this.dieing++;
+  }
+
+  playHurtAnimation() {
+    this.playAnimation(this.IMAGES_HURT, this.playOnes);
+    this.attack = false;
+    setInterval(() => {
+      world.character.hitEndboss = false;
+    }, 500);
   }
 }

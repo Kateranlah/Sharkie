@@ -2,7 +2,7 @@ class Pufffish extends MovableObject {
   height = 120;
   width = 70;
   speed = 5;
-  
+
   offset = {
     x: 15,
     y: 30,
@@ -65,48 +65,47 @@ class Pufffish extends MovableObject {
       this.moveHeight();
     }, 200);
     setInterval(() => {
-
       if (!this.dead) {
-        if ("test") {
-          this.playAnimation(this.IMAGES_MOVING_GREEN);
-        } else {
-          this.playAnimation(this.IMAGES_ANGRY_MOVING_GREEN);
-        }
-
-        if (this.x <= -300 && this.swimRightDone) {
-          this.swimRightDone = false;
-        } else if (this.x <= 1900 && this.swimRightDone) {
-          this.moveLeft();
-          this.otherDirection = false;
-        } else if (!this.swimRightDone && this.x < 1900) {
-          this.moveRight();
-          this.otherDirection = true;
-        } else {
-          this.swimRightDone = true;
-        }
+        this.isSwimming();
       } else {
-        this.playAnimation(this.IMAGES_DEAD_GREEN);
-        this.speed = 40;
-        this.moveUp();
-        this.moveRight();
+        this.playDieAnimation();
       }
     }, 1000 / 25);
   }
 
+  isSwimming() {
+    if (this.x <= -300 && this.swimRightDone) {
+      this.swimRightDone = false;
+    } else if (this.x <= 1900 && this.swimRightDone) {
+      this.moveLeft();
+      this.otherDirection = false;
+    } else if (!this.swimRightDone && this.x < 1900) {
+      this.moveRight();
+      this.otherDirection = true;
+    } else {
+      this.swimRightDone = true;
+    }
+    this.playAnimation(this.IMAGES_ANGRY_MOVING_GREEN);
+  }
 
-
-  moveHeight(){
+  moveHeight() {
     if (!this.dead) {
-    
       if (this.y > 150 && !this.swimUpDone) {
         this.moveUp();
-   }else if(this.y <= 160 && !this.swimUpDone){
-       this.swimUpDone = true;
-   }else if(this.swimUpDone && this.y < 240){
-       this.moveDown();
-   }else{
-       this.swimUpDone = false;
-   }
+      } else if (this.y <= 160 && !this.swimUpDone) {
+        this.swimUpDone = true;
+      } else if (this.swimUpDone && this.y < 240) {
+        this.moveDown();
+      } else {
+        this.swimUpDone = false;
+      }
+    }
   }
-}
+
+  playDieAnimation() {
+    this.playAnimation(this.IMAGES_DEAD_GREEN);
+    this.speed = 40;
+    this.moveUp();
+    this.moveRight();
+  }
 }

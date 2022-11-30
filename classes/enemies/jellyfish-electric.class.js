@@ -42,7 +42,7 @@ class JellyfishElectric extends MovableObject {
     this.loadImages(this.IMAGES_MOVING_GREEN);
     this.loadImages(this.IMAGES_DEAD_PINK);
     this.loadImages(this.IMAGES_DEAD_GREEN);
-    this.x = x
+    this.x = x;
     this.y = 50 + Math.random() * 300;
     this.animate();
   }
@@ -52,18 +52,17 @@ class JellyfishElectric extends MovableObject {
       if (!this.dead) {
         this.playAnimation(this.IMAGES_MOVING_PINK);
         if (this.y > 100 && !this.swimUpDone) {
-             this.moveUp();
-        }else if(this.y <= 100 && !this.swimUpDone){
-            this.swimUpDone = true;
-        }else if(this.swimUpDone && this.y < 380){
-            this.moveDown();
-        }else{
-            this.swimUpDone = false;
+          this.moveUp();
+        } else if (this.y <= 100 && !this.swimUpDone) {
+          this.swimUpDone = true;
+        } else if (this.swimUpDone && this.y < 380) {
+          this.moveDown();
+        } else {
+          this.swimUpDone = false;
         }
-       
       } else {
         this.playAnimation(this.IMAGES_DEAD_PINK);
-        this.speed = 20
+        this.speed = 20;
         this.moveUp();
       }
     }, 200);
