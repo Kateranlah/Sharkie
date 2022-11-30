@@ -30,6 +30,7 @@ class World {
       this.checkCollisions();
       this.checkCollect();
       this.checkFreeWay();
+      this.checkGameOver()
     }, 1000 / 60);
   }
 
@@ -177,5 +178,16 @@ class World {
     enemy.energy -= 40;
     enemy.attack = false;
     world.character.hitEndboss = true;
+  }
+
+  checkGameOver(){
+    if(this.endbossDead()){
+      alert('you won')
+    }
+  
+  }
+
+  endbossDead(){
+    return this.level.enemies[this.level.enemies.length-1]['energy'] <= 0
   }
 }
