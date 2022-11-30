@@ -23,33 +23,25 @@ h1 {
 #movement{
     position: absolute;
     left: 0;
-    bottom: 0;
+    bottom: 10px;
     right: 0;
     display: flex;
     justify-content: space-between;
     height: 20vh;
-
+    width: 100vw;
 }
 
-#attacks{
+/* #attacks{
     position: absolute;
-    left: 0;
+    left: 10.5%;
     bottom: 90px;
-    right: 0;
+    right: 10.5%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     height: 20vh;
-}
+} */
 
-#poisen{
-   background-color: green;
-   margin-right: 160px;
-}
 
-#bubble{
-    background-color: blue;
-    margin-left: 160px;
-}
 
 #movement .btn-container button{
     background-color: unset;
@@ -63,7 +55,6 @@ h1 {
 button{
     height: 80px;
     width: 80px;
-    margin-inline: 30px;
     border: none;
     border-radius: 33%;
     color: white;
@@ -79,6 +70,16 @@ button img{
 
 }
 
+#poisen{
+    background-color: green;
+ 
+ 
+ }
+ 
+ #bubble{
+     background-color: blue;
+ 
+ }
 
 @font-face {
   font-family: "lucky";
@@ -86,12 +87,14 @@ button img{
 }
 
 @media only screen and (max-width: 760px) {
+  main,
   canvas {
     width: 100%;
   }
 }
 
 @media only screen and (max-height: 480px) {
+  main,
   canvas {
     height: 100vh;
   }

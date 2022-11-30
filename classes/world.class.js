@@ -79,7 +79,7 @@ class World {
       }
 
       if (this.bubbles.length >= 1) {
-        this.checkIfBubbleHits();
+        this.checkIfBubbleHits(enemy, e);
       }
       e++;
     });
@@ -154,26 +154,26 @@ class World {
     this.healthBar.setPercentage(this.character.energy);
   }
 
-  checkIfBubbleHits() {
+  checkIfBubbleHits(enemy, e) {
     let i = 0;
     this.bubbles.forEach((b) => {
       if (this.bubbles[i].isColliding(enemy)) {
-        this.removeBubble();
+        this.removeBubble(i);
         if (enemy instanceof JellyfishElectric || enemy instanceof Jellyfish) {
           this.level.enemies[e].dead = true;
         } else if (enemy instanceof Endboss && b instanceof PoisenBubble) {
-          this.reduceEndbossHp();
+          this.reduceEndbossHp(enemy);
         }
       }
       i++;
     });
   }
 
-  removeBubble() {
+  removeBubble(i) {
     this.bubbles.splice(i, 1);
   }
   
-  reduceEndbossHp() {
+  reduceEndbossHp(enemy) {
     enemy.energy -= 40;
     enemy.attack = false;
     world.character.hitEndboss = true;
