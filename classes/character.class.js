@@ -182,7 +182,6 @@ class Character extends MovableObject {
         this.movements();
         this.attacks();
       }
-      console.log(this.poisenCollected);
     }, 1000 / 60);
 
     setInterval(() => {

@@ -1,13 +1,11 @@
-class Won extends DrawableObject{
-x = 100
-y= 130
-width = 480
-height = 200
+class Won extends DrawableObject {
+  x = 0;
+  y = 0;
+  width = 720;
+  height = 480;
 
-
-constructor(){
+  constructor() {
     super();
-    this.loadImage("img/6.Botones/Tittles/Game Over/Recurso 12.png")
-}
-
+    this.loadImage("img/6.Botones/Try again/Mesa de trabajo 1.png");
+  }
 }

@@ -12,6 +12,8 @@ class World {
   bubbles = [];
   barriers = new Barriers();
   won = new Won();
+  lost = new Lost();
+  outcome;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -31,7 +33,7 @@ class World {
       this.checkCollisions();
       this.checkCollect();
       this.checkFreeWay();
-      this.checkGameOver()
+      this.checkGameOver();
     }, 1000 / 60);
   }
 
@@ -89,7 +91,7 @@ class World {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-  
+
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
 
@@ -107,9 +109,8 @@ class World {
     this.addToMap(this.healthBar);
     this.addToMap(this.poisenBar);
     this.addToMap(this.coinBar);
-    
+
     // ------------- Space for fixed objects ends ------------- //
-    
 
     self = this;
     requestAnimationFrame(function () {
@@ -117,9 +118,13 @@ class World {
     });
   }
 
-  drawEndscreen(){
+  drawEndscreen() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.addToMap(this.won)
+    if (this.outcome == "win") {
+      this.addToMap(this.won);
+    } else {
+      this.addToMap(this.lost);
+    }
 
     self = this;
     requestAnimationFrame(function () {
@@ -186,46 +191,40 @@ class World {
   removeBubble(i) {
     this.bubbles.splice(i, 1);
   }
-  
+
   reduceEndbossHp(enemy) {
     enemy.energy -= 40;
     enemy.attack = false;
     world.character.hitEndboss = true;
   }
 
-  checkGameOver(){
-    if(this.endbossDead()){
-    this.gameOver('win')
+  checkGameOver() {
+    if (this.endbossDead()) {
+      this.gameOver("win");
     }
-    if(this.playerDead()){
-      this.gameOver('lose')
+    if (this.playerDead()) {
+      this.gameOver("lose");
     }
   }
 
-
-
-  gameOver(){
+  gameOver(outcome) {
+    this.outcome = outcome;
     setTimeout(() => {
       this.clearAllIntervals();
-       this.drawEndscreen();
-       this.clearAllIntervals();
+      this.drawEndscreen();
+      this.clearAllIntervals();
     }, 2500);
- 
   }
 
-
-  endbossDead(){
-    return this.level.enemies[this.level.enemies.length-1]['energy'] <= 0
+  endbossDead() {
+    return this.level.enemies[this.level.enemies.length - 1]["energy"] <= 0;
   }
 
-  playerDead(){
-    return this.character.energy <= 0
+  playerDead() {
+    return this.character.energy <= 0;
   }
 
   clearAllIntervals() {
     for (let i = 1; i < 9999; i++) window.clearInterval(i);
   }
-
-  
-
 }
