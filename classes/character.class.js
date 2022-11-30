@@ -182,6 +182,7 @@ class Character extends MovableObject {
         this.movements();
         this.attacks();
       }
+      console.log(this.poisenCollected);
     }, 1000 / 60);
 
     setInterval(() => {
@@ -205,10 +206,10 @@ class Character extends MovableObject {
 
   blowPoisenBubble() {
     if (this.poisenCollected > 0) {
-      this.poisenCollected--;
       if (!this.madeRecentBubble && !this.isHurt()) {
         let bubble = new PoisenBubble();
         this.world.creatBubble(bubble);
+        this.poisenCollected--;
         world.poisenBar.setPercentage(
           world.character.poisenCollected,
           "poisen"

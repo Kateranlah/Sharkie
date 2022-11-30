@@ -61,6 +61,7 @@ class Bubbles extends MovableObject {
       }
     }, 1000 / 25);
   }
+  
   driftUp() {
     setInterval(() => {
       if (this.isUnderWater() || this.speedY > 0) {

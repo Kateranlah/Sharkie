@@ -74,7 +74,6 @@ class MovableObject extends DrawableObject {
         enemy.energy -= 15;
       }
     }
-
     if (!this.isHurt() && !this.slapping) {
       this.checkWhatHit(enemy);
       if (this.energy <= 0) {
@@ -94,11 +93,9 @@ class MovableObject extends DrawableObject {
     if (this.isJellyfishElectric(enemy, dead)) {
       this.getElectricDmg(dead);
     }
-
     if (this.isEndboss(enemy) && this.coinsCollected < 20) {
       this.energy -= 40;
     }
-
     if (this.isNoneElectricEnemy(enemy)) {
       this.getPoisenDmg(dead);
     }
