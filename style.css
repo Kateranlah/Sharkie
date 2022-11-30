@@ -70,14 +70,14 @@ button img{
 
 }
 
-#poisen{
-    background-color: green;
+#btn-poisen{
+    background-color: green !important;
  
  
  }
  
- #bubble{
-     background-color: blue;
+ #btn-bubble{
+     background-color: blue !important;
  
  }
 
