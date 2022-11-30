@@ -181,18 +181,19 @@ class Character extends MovableObject {
       if (!this.isDead()) {
         this.movements();
         this.attacks();
-      
       }
     }, 1000 / 60);
 
     setInterval(() => {
-     this.animateCharacter();
+      this.animateCharacter();
     }, 150);
   }
 
   slap() {
     this.slapping = true;
-    setTimeout(() => {this.slapping = false;}, 500);
+    setTimeout(() => {
+      this.slapping = false;
+    }, 500);
   }
 
   blowBubble() {
@@ -227,10 +228,6 @@ class Character extends MovableObject {
     this.sleep = false;
   }
 
-
-
-
-
   // CHECK FOR FREE SPACE
 
   topIsFree() {
@@ -249,8 +246,7 @@ class Character extends MovableObject {
     return this.x > -450 && !this.barrierBlockLeft;
   }
 
-
-  // DO SWIMM MOVEMENTS // 
+  // DO SWIMM MOVEMENTS //
 
   movements() {
     if (this.world.keyboard.UP && this.topIsFree()) {
@@ -303,82 +299,100 @@ class Character extends MovableObject {
 
   // DO ATTACKS //
 
-  attacks(){
- if (this.world.keyboard.SPACE) {
-    this.slap();
-    this.setLastMove();
+  attacks() {
+    if (this.world.keyboard.SPACE) {
+      this.slap();
+      this.setLastMove();
+    }
+    if (this.world.keyboard.E && !this.isHurt()) {
+      setTimeout(() => this.blowBubble(), 900);
+      this.setLastMove();
+    }
+    if (this.world.keyboard.R && !this.isHurt()) {
+      setTimeout(() => this.blowPoisenBubble(), 900);
+      this.setLastMove();
+    }
   }
-  if (this.world.keyboard.E && !this.isHurt()) {
-    setTimeout(() => this.blowBubble(), 900);
-    this.setLastMove();
-  }
-  if (this.world.keyboard.R && !this.isHurt()) {
-    setTimeout(() => this.blowPoisenBubble(), 900);
-    this.setLastMove();
-  }
-  }
-
 
   // ANIMATIONS
 
-  animateCharacter(){
+  animateCharacter() {
     if (this.isDead() && this.poisen) {
       this.playAnimation(this.IMAGES_DIE_POISEN, this.playOnes);
     } else if (this.isDead() && this.electric) {
       this.playAnimation(this.IMAGES_DIE_SHOCK, this.playOnes);
-    } else if (
-      this.isHurt() &&
-      this.poisen &&
-      !this.slapping &&
-      !this.isDead()
-    ) {
+    } else if (this.getsAttacked()) {
       this.playAnimation(this.IMAGES_HURT_POISEN);
-    } else if (
-      this.isHurt() &&
-      this.electric &&
-      !this.slapping &&
-      !this.isDead()
-    ) {
+    } else if (this.getsShocked()) {
       this.playAnimation(this.IMAGES_HURT_SHOCK);
     } else if (this.slapping && !this.isDead()) {
       this.playAnimation(this.IMAGES_SLAP, this.playOnes);
-    } else if (
-      this.world.keyboard.E &&
-      !this.madeRecentBubble &&
-      !this.isDead() &&
-      !this.isHurt()
-    ) {
+    } else if (this.isMakingBubble()) {
       this.playAnimation(this.IMAGES_BUBBLE, this.playOnes);
-    } else if (
-      this.world.keyboard.R &&
-      !this.madeRecentBubble &&
-      !this.isDead() &&
-      !this.isHurt()
-    ) {
+    } else if (this.isMakingPoisenBubble()) {
       if (this.poisenCollected > 0) {
         this.playAnimation(this.IMAGES_BUBBLE_POISEN, this.playOnes);
       } else {
         this.playAnimation(this.IMAGES_BUBBLE_MISSING, this.playOnes);
       }
-    } else if (
-      (!this.isDead() && this.world.keyboard.UP) ||
-      this.world.keyboard.RIGHT ||
-      this.world.keyboard.LEFT
-    ) {
+    } else if (this.isSwimming()) {
       this.playAnimation(this.IMAGES_SWIM);
-    } else if (
-      this.sleep &&
-      this.idled == this.IMAGES_LONG_IDLE.length &&
-      !this.isDead()
-    ) {
+    } else if (this.isSleeping()) {
       this.playAnimation(this.IMAGES_SLEEP);
-    } else if (this.isLongIdle() >= 10 && !this.isDead()) {
-      this.playAnimation(this.IMAGES_LONG_IDLE);
-      this.idled++;
-      this.sleep = true;
+    } else if (this.isSpleepy()) {
+      this.fallAsleep();
     } else if (!this.isDead()) {
       this.playAnimation(this.IMAGES_IDLE);
     }
   }
- 
+
+  getsAttacked() {
+    return this.isHurt() && this.poisen && !this.slapping && !this.isDead();
+  }
+
+  getsShocked() {
+    return this.isHurt() && this.electric && !this.slapping && !this.isDead();
+  }
+
+  isMakingBubble() {
+    return (
+      this.world.keyboard.E &&
+      !this.madeRecentBubble &&
+      !this.isDead() &&
+      !this.isHurt()
+    );
+  }
+
+  isMakingPoisenBubble() {
+    return (
+      this.world.keyboard.R &&
+      !this.madeRecentBubble &&
+      !this.isDead() &&
+      !this.isHurt()
+    );
+  }
+
+  isSwimming() {
+    return (
+      (!this.isDead() && this.world.keyboard.UP) ||
+      this.world.keyboard.RIGHT ||
+      this.world.keyboard.LEFT
+    );
+  }
+
+  isSpleepy() {
+    return this.isLongIdle() >= 10 && !this.isDead();
+  }
+
+  fallAsleep() {
+    this.playAnimation(this.IMAGES_LONG_IDLE);
+    this.idled++;
+    this.sleep = true;
+  }
+
+  isSleeping() {
+    return (
+      this.sleep && this.idled == this.IMAGES_LONG_IDLE.length && !this.isDead()
+    );
+  }
 }
