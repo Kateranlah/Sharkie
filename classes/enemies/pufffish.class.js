@@ -66,14 +66,18 @@ class Pufffish extends MovableObject {
     }, 200);
     setInterval(() => {
       if (!this.dead) {
-        this.isSwimming();
+        if (this.isCloseToCharacter()) {
+          this.isSwimming("angry");
+        } else {
+          this.isSwimming("calm");
+        }
       } else {
         this.playDieAnimation();
       }
     }, 1000 / 25);
   }
 
-  isSwimming() {
+  isSwimming(mood) {
     if (this.x <= -300 && this.swimRightDone) {
       this.swimRightDone = false;
     } else if (this.x <= 1900 && this.swimRightDone) {
@@ -85,7 +89,11 @@ class Pufffish extends MovableObject {
     } else {
       this.swimRightDone = true;
     }
-    this.playAnimation(this.IMAGES_ANGRY_MOVING_GREEN);
+    if (mood == "angry") {
+      this.playAnimation(this.IMAGES_ANGRY_MOVING_GREEN);
+    } else {
+      this.playAnimation(this.IMAGES_MOVING_GREEN);
+    }
   }
 
   moveHeight() {

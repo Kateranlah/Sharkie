@@ -145,4 +145,8 @@ class MovableObject extends DrawableObject {
     timepassed = timepassed / 1000; // from ms to s
     return timepassed < 0.5;
   }
+
+  isCloseToCharacter(){
+  return world.character.x - this.x < 220 && world.character.x - this.x > (-300)
+  }
 }
