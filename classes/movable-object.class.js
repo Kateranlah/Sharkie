@@ -122,7 +122,7 @@ class MovableObject extends DrawableObject {
     if (!dead) {
       setTimeout(() => {
         this.electric = false;
-      }, 500);
+      }, 800);
     }
   }
 

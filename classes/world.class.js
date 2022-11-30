@@ -11,6 +11,7 @@ class World {
   coinBar = new CoinBar();
   bubbles = [];
   barriers = new Barriers();
+  won = new Won();
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -88,7 +89,7 @@ class World {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+  
     this.ctx.translate(this.camera_x, 0);
     this.addObjectsToMap(this.level.backgroundObjects);
 
@@ -106,11 +107,23 @@ class World {
     this.addToMap(this.healthBar);
     this.addToMap(this.poisenBar);
     this.addToMap(this.coinBar);
+    
     // ------------- Space for fixed objects ends ------------- //
+    
 
     self = this;
     requestAnimationFrame(function () {
       self.draw();
+    });
+  }
+
+  drawEndscreen(){
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.addToMap(this.won)
+
+    self = this;
+    requestAnimationFrame(function () {
+      self.drawEndscreen();
     });
   }
 
@@ -182,12 +195,37 @@ class World {
 
   checkGameOver(){
     if(this.endbossDead()){
-      alert('you won')
+    this.gameOver('win')
     }
-  
+    if(this.playerDead()){
+      this.gameOver('lose')
+    }
   }
+
+
+
+  gameOver(){
+    setTimeout(() => {
+      this.clearAllIntervals();
+       this.drawEndscreen();
+       this.clearAllIntervals();
+    }, 2500);
+ 
+  }
+
 
   endbossDead(){
     return this.level.enemies[this.level.enemies.length-1]['energy'] <= 0
   }
+
+  playerDead(){
+    return this.character.energy <= 0
+  }
+
+  clearAllIntervals() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+  }
+
+  
+
 }
