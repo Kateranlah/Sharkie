@@ -179,47 +179,7 @@ class Character extends MovableObject {
   animate() {
     setInterval(() => {
       if (!this.isDead()) {
-        if (
-          this.world.keyboard.UP &&
-          this.y + this.offset.y > 0 &&
-          !this.barrierBlockUp
-        ) {
-          this.sleep = false;
-          this.moveUp();
-          this.barrierBlockDown = false;
-          this.setLastMove();
-        }
-
-        if (
-          this.world.keyboard.DOWN &&
-          this.y < 480 + this.offset.height &&
-          !this.barrierBlockDown
-        ) {
-          this.barrierBlockUp = false;
-          this.moveDown();
-          this.setLastMove();
-        }
-        if (
-          this.world.keyboard.RIGHT &&
-          this.x < this.world.level.level_end_x &&
-          !this.barrierBlockRight
-        ) {
-          this.world.camera_x = -this.x + 200;
-          this.barrierBlockLeft = false;
-          this.moveRight("right");
-
-          this.setLastMove();
-        }
-        if (
-          this.world.keyboard.LEFT &&
-          this.x > -450 &&
-          !this.barrierBlockLeft
-        ) {
-          this.barrierBlockRight = false;
-          this.moveLeft("right");
-          this.world.camera_x = -this.x + 200;
-          this.setLastMove();
-        }
+        this.movements();
 
         if (this.world.keyboard.SPACE) {
           this.slap();
@@ -339,5 +299,79 @@ class Character extends MovableObject {
   setLastMove() {
     this.lastMove = new Date().getTime();
     this.sleep = false;
+  }
+
+
+
+
+
+  // CHECK FOR FREE SPACE
+
+  topIsFree() {
+    return this.y + this.offset.y > 0 && !this.barrierBlockUp;
+  }
+
+  bottomIsFree() {
+    return this.y < 480 + this.offset.height && !this.barrierBlockDown;
+  }
+
+  rightIsFree() {
+    return this.x < this.world.level.level_end_x && !this.barrierBlockRight;
+  }
+
+  leftIsFree() {
+    return this.x > -450 && !this.barrierBlockLeft;
+  }
+
+
+  // DO SWIMM MOVEMENTS // 
+
+  movements() {
+    if (this.world.keyboard.UP && this.topIsFree()) {
+      this.moveUp();
+    }
+    if (this.world.keyboard.DOWN && this.bottomIsFree()) {
+      this.moveDown();
+    }
+    if (this.world.keyboard.RIGHT && this.rightIsFree()) {
+      this.moveRight();
+    }
+    if (this.world.keyboard.LEFT && this.leftIsFree()) {
+      this.moveLeft();
+    }
+  }
+
+  moveUp() {
+    this.sleep = false;
+    super.moveUp();
+    this.barrierBlockDown = false;
+    this.setLastMove();
+  }
+
+  moveDown() {
+    this.barrierBlockUp = false;
+    super.moveDown();
+    this.setLastMove();
+  }
+
+  moveRight() {
+    this.world.camera_x = -this.x + 200;
+    this.barrierBlockLeft = false;
+    super.moveRight("right");
+    this.setLastMove();
+  }
+
+  moveRight() {
+    this.world.camera_x = -this.x + 200;
+    this.barrierBlockLeft = false;
+    super.moveRight();
+    this.setLastMove();
+  }
+
+  moveLeft() {
+    this.barrierBlockRight = false;
+    super.moveLeft();
+    this.world.camera_x = -this.x + 200;
+    this.setLastMove();
   }
 }
