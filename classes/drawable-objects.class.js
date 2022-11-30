@@ -1,4 +1,4 @@
-class DrawableObject{
+class DrawableObject {
   x = 200;
   y = 40;
   img;
@@ -14,14 +14,7 @@ class DrawableObject{
   }
 
   draw(ctx) {
- try {
-         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
- } catch (error) {
-  
- }
-   
-    
-
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
   loadImages(arr) {
@@ -33,14 +26,7 @@ class DrawableObject{
   }
 
   drawHitbox(ctx) {
-    if (
-      this instanceof Character ||
-      this instanceof Jellyfish ||
-      this instanceof JellyfishElectric ||
-      this instanceof Barriers ||
-      this instanceof Pufffish ||
-      this instanceof Endboss
-    ) {
+    if (this.isEnemy()) {
       ctx.beginPath();
       ctx.lineWidth = "3";
       ctx.strokeStyle = "blue";
@@ -52,5 +38,16 @@ class DrawableObject{
       );
       ctx.stroke();
     }
+  }
+
+  isEnemy() {
+    return (
+      this instanceof Character ||
+      this instanceof Jellyfish ||
+      this instanceof JellyfishElectric ||
+      this instanceof Barriers ||
+      this instanceof Pufffish ||
+      this instanceof Endboss
+    );
   }
 }

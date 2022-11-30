@@ -1,17 +1,16 @@
-class Level{
-    enemies;
-    collectables;
-    lights;
-    backgroundObjects;
-    barriers;
+class Level {
+  enemies;
+  collectables;
+  lights;
+  backgroundObjects;
+  barriers;
+  level_end_x = 2600;
 
-    level_end_x = 2600
-
-    constructor(enemies, collectables, lights, backgroundObjects, barrier){
-this.enemies = enemies;
-this.lights = lights;
-this.collectables = collectables;
-this.backgroundObjects = backgroundObjects;
-this.barriers = barrier;
-    }
+  constructor(enemies, collectables, lights, backgroundObjects, barrier) {
+    this.enemies = enemies;
+    this.lights = lights;
+    this.collectables = collectables;
+    this.backgroundObjects = backgroundObjects;
+    this.barriers = barrier;
+  }
 }
