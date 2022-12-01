@@ -8,6 +8,7 @@ class Coin extends Collectables {
 
   constructor(x, y) {
     super();
+    this.loadImage("img/4. Marcadores/1. Coins/1.png");
     this.loadImages(this.IMAGES);
     this.x = x;
     this.y = y;

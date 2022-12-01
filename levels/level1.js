@@ -1,5 +1,5 @@
 let level1;
-// function initLevel() {
+function initLevel() {
 level1 = new Level(
   // Add Enemies //
   [
@@ -101,3 +101,4 @@ level1 = new Level(
     new GroundBarrier(2250, 180, 340, 500),
   ]
 );
+}

@@ -11,7 +11,9 @@ class Poisen extends Collectables {
   ];
 
   constructor(x, y) {
-    super().loadImages(this.IMAGES);
+    super();
+    this.loadImage("img/4. Marcadores/1. Coins/1.png");
+    this.loadImages(this.IMAGES);
     this.x = x;
     this.y = y;
     this.animate(this.IMAGES);
