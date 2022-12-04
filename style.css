@@ -18,17 +18,31 @@ h1 {
   font-size: 64px;
   color: rgb(211, 231, 112);
   text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  text-align: center;
 }
 
-#movement{
-    position: absolute;
-    left: 0;
-    bottom: 10px;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    height: 20vh;
-    width: 100vw;
+h2{
+  font-size: 40px;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  color: rgb(211, 231, 112);
+text-decoration: underline;
+text-decoration-style: double; 
+text-decoration-color:  rgb(211, 231, 112);
+text-decoration-thickness: 8px;
+text-decoration-skip: spaces;		/** Safari **/
+text-decoration-skip-ink: spaces;
+
+}
+
+#movement {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  height: 20vh;
+  width: 100vw;
 }
 
 /* #attacks{
@@ -41,45 +55,71 @@ h1 {
     height: 20vh;
 } */
 
-
-
-#movement .btn-container button{
-    background-color: unset;
+#movement .btn-container button {
+  background-color: unset;
 }
-.btn-container{
-    display: flex;
-    align-items: center;
-
+.btn-container {
+  display: flex;
+  align-items: center;
 }
 
-button{
-    height: 80px;
-    width: 80px;
-    border: none;
-    border-radius: 33%;
-    color: white;
-    font-size: 20px;
-    font-family: lucky, Arial, Helvetica, sans-serif;
-   
+button {
+  height: 80px;
+  width: 80px;
+  border: none;
+  border-radius: 33%;
+  color: white;
+  font-size: 20px;
+  font-family: lucky, Arial, Helvetica, sans-serif;
+}
+
+button img {
+  width: 100%;
+  height: 100%;
+}
+
+#btn-poisen {
+  background-color: green !important;
+}
+
+#btn-bubble {
+  background-color: blue !important;
+}
+
+.d-none{
+  display: none !important;
 }
 
 
-button img{
-   width: 100%;
-   height: 100%;
 
+
+
+/* //////////////  Instructions     ///////////////// */
+
+article{
+  text-align: center;
+background-color: rgba(0, 0, 255, 0.15);
+  position: absolute;
+  top: 0;
+  left: 10px;
+  bottom: 0;
 }
 
-#btn-poisen{
-    background-color: green !important;
- 
- 
- }
- 
- #btn-bubble{
-     background-color: blue !important;
- 
- }
+.container{
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  color: rgb(237, 255, 146);
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+}
+
+
+
 
 @font-face {
   font-family: "lucky";
