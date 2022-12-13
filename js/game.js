@@ -73,6 +73,18 @@ function btnEvents() {
       keyboard.R = false;
     }, 500);
   });
+
+  document.getElementById("btn-slap").addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    keyboard.SPACE = true;
+  });
+
+  document.getElementById("btn-slap").addEventListener("touchend", (e) => {
+    e.preventDefault();
+    setTimeout(() => {
+      keyboard.SPACE = false;
+    }, 500);
+  });
 }
 
 window.addEventListener(`keydown`, (e) => {

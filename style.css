@@ -21,17 +21,22 @@ h1 {
   text-align: center;
 }
 
-h2{
+h2 {
   font-size: 40px;
-  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000 !important;
   color: rgb(211, 231, 112);
-text-decoration: underline;
-text-decoration-style: double; 
-text-decoration-color:  rgb(211, 231, 112);
-text-decoration-thickness: 8px;
-text-decoration-skip: spaces;		/** Safari **/
-text-decoration-skip-ink: spaces;
+  text-decoration: underline;
+  text-decoration-style: double;
+  text-decoration-color: rgb(211, 231, 112);
+  text-decoration-thickness: 8px;
+  text-decoration-skip: spaces; /** Safari **/
+  text-decoration-skip-ink: spaces;
+}
 
+main {
+  display: flex;
+  flex-direction: column;
 }
 
 #movement {
@@ -70,6 +75,8 @@ button {
   border-radius: 33%;
   color: white;
   font-size: 20px;
+  margin-right: 8px;
+ 
   font-family: lucky, Arial, Helvetica, sans-serif;
 }
 
@@ -86,40 +93,62 @@ button img {
   background-color: blue !important;
 }
 
-.d-none{
+#btn-slap {
+  background-color: grey !important;
+}
+
+.d-none {
   display: none !important;
 }
 
+.show-mobile-only {
+  display: none !important;
+}
 
-
-
+.show-desktop-only {
+  display: flex !important;
+}
 
 /* //////////////  Instructions     ///////////////// */
 
-article{
+article {
   text-align: center;
-background-color: rgba(0, 0, 255, 0.15);
-  position: absolute;
+  background-color: rgba(0, 0, 255, 0.15);
+  /* position: absolute;
   top: 0;
   left: 10px;
-  bottom: 0;
+  bottom: 0; */
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000 !important;
 }
 
-.container{
+.container {
   font-size: 24px;
   display: flex;
   flex-direction: column;
   color: rgb(237, 255, 146);
-  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.row{
+.row {
   display: flex;
   flex-direction: row;
+  margin-bottom: 10px;
+  margin-inline: 10px;
+  align-items: center;
 }
 
+.keys {
+  color: hsl(180deg 51% 52%);
+  background-color: rgb(21, 111, 153);
+  border: solid 2px black;
+  padding: 10px;
+  border-radius: 15%;
+  margin-right: 10px;
+}
 
-
+.button-container-top{
+position: absolute;
+}
 
 @font-face {
   font-family: "lucky";
@@ -131,6 +160,22 @@ background-color: rgba(0, 0, 255, 0.15);
   canvas {
     width: 100%;
   }
+  article {
+
+    position: absolute;
+    top: 0;
+    left: 10px;
+    bottom: 0;
+
+  }
+
+  .show-mobile-only {
+    display: flex !important;
+  }
+
+  .show-desktop-only {
+    display: none !important;
+  }
 }
 
 @media only screen and (max-height: 480px) {
@@ -140,5 +185,20 @@ background-color: rgba(0, 0, 255, 0.15);
   }
   h1 {
     display: none;
+  }
+
+  article {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    bottom: 0;
+ 
+  }
+  .show-mobile-only {
+    display: flex !important;
+  }
+
+  .show-desktop-only {
+    display: none !important;
   }
 }
