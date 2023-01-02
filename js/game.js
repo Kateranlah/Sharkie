@@ -20,6 +20,36 @@ function checkInstructionWindow(){
   }
 }
 
+function unmute(){
+  world.character.slap_sound.volume = 1;
+  world.character.blow_sound.volume = 1;
+  world.character.breath_sound.volume = 1;
+  world.character.sleep_sound.volume = 1;
+  world.character.hurt_sound.volume = 1;
+  world.character.electric_sound.volume = 1;
+  world.win_sound.volume = 1;
+  world.collectables.coin_sound.volume = 1;
+  world.collectables.poisen_sound.volume = 1;
+  world.lose_sound.volume = 1;
+  document.getElementById('btn-mute').setAttribute('onclick','mute();');
+  document.getElementById('muteImg').src="img/6.Botones/mute-2-64.png";
+}
+
+function mute(){
+  world.character.slap_sound.volume = 0;
+  world.character.blow_sound.volume = 0;
+  world.character.breath_sound.volume = 0;
+  world.character.sleep_sound.volume = 0;
+  world.character.hurt_sound.volume = 0;
+  world.character.electric_sound.volume = 0;
+  world.win_sound.volume = 0;
+  world.collectables.coin_sound.volume = 0;
+  world.collectables.poisen_sound.volume = 0;
+  world.lose_sound.volume = 0;
+  document.getElementById('btn-mute').setAttribute('onclick','unmute();');
+  document.getElementById('muteImg').src="img/6.Botones/volume-up-4-64.png";
+}
+
 function restartGame(){
   clearAllIntervals();
   init();

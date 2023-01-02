@@ -12,8 +12,6 @@ class Endboss extends MovableObject {
   };
   lastMove;
   attack = false;
-  entrance_sound = new Audio('audio/bossEntrance.mp3');
-  bite_sound = new Audio('audio/bite.mp3');
 
   IMAGES_INTRODUCE = [
     "img/2.Enemy/3 Final Enemy/1.Introduce/1.png",
@@ -151,7 +149,6 @@ class Endboss extends MovableObject {
     if (this.atBossArea()) {
       if (this.introducingImageMissing()) {
         this.playIntroduceAnimation();
-        this.entrance_sound.play();
       } else {
         if (this.energy <= 0 && this.dieingImageMissing()) {
           this.playDiengAnimation();
@@ -160,7 +157,6 @@ class Endboss extends MovableObject {
         } else if (this.energy > 0) {
           if (this.attack && !world.character.hitEndboss) {
             this.playAnimation(this.IMAGES_ATTACK);
-            this.bite_sound.play();
           } else {
             this.playAnimation(this.IMAGES_FLOATING);
           }
