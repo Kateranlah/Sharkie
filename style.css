@@ -67,6 +67,24 @@ main {
   display: flex;
   align-items: center;
 }
+.btn-container-top {
+  display: flex;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  justify-content: flex-end;
+}
+
+.btn-container-top > button{
+  width: 30%;
+  height: 30%;
+  background-color: rgb(211, 231, 112)
+}
+.btn-container-top > button > img {
+  margin-top: 5px;
+  max-width: 64px;
+
+}
 
 button {
   height: 80px;
@@ -76,7 +94,7 @@ button {
   color: white;
   font-size: 20px;
   margin-right: 8px;
- 
+
   font-family: lucky, Arial, Helvetica, sans-serif;
 }
 
@@ -147,8 +165,8 @@ article {
   margin-right: 10px;
 }
 
-.button-container-top{
-position: absolute;
+.button-container-top {
+  position: absolute;
 }
 
 @font-face {
@@ -167,9 +185,7 @@ position: absolute;
   h1 {
     display: none;
   }
-
 }
-
 
 @media only screen and (max-width: 760px) {
   h1 {
@@ -180,12 +196,10 @@ position: absolute;
     width: 100%;
   }
   article {
-
     position: absolute;
     top: 0;
     left: 10px;
     bottom: 0;
-
   }
 
   .show-portable-only {
@@ -211,7 +225,6 @@ position: absolute;
     top: 0;
     left: 10px;
     bottom: 0;
- 
   }
   .show-portable-only {
     display: flex !important;

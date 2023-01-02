@@ -9,7 +9,16 @@ function init() {
   btnEvents();
 }
 
+function checkInstructionWindow(){
+  if
+}
+
 function btnEvents() {
+  document.getElementById("btn-instructions").addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    checkInstructionWindow();
+  });
+
   document.getElementById("btn-right").addEventListener("touchstart", (e) => {
     e.preventDefault();
     keyboard.RIGHT = true;
