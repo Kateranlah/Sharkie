@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let instructionOpen = false
 
 function init() {
   canvas = document.getElementById("canvas");
@@ -10,7 +11,13 @@ function init() {
 }
 
 function checkInstructionWindow(){
-  if
+  if(!instructionOpen){
+    instructionOpen = true;
+    document.getElementById('instructions').classList.add('d-none');
+  }else{
+    instructionOpen = false;
+    document.getElementById('instructions').classList.remove('d-none');
+  }
 }
 
 function btnEvents() {

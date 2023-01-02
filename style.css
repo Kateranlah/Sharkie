@@ -69,20 +69,20 @@ main {
 }
 .btn-container-top {
   display: flex;
-  position: absolute;
-  top: 10px;
+  position: relative;
+  top: 0;
   right: 0;
   justify-content: flex-end;
 }
 
 .btn-container-top > button{
-  width: 30%;
-  height: 30%;
+  width: 48px;
+  height: 48px;
   background-color: rgb(211, 231, 112)
 }
 .btn-container-top > button > img {
   margin-top: 5px;
-  max-width: 64px;
+  max-height: 32px;
 
 }
 
@@ -115,9 +115,7 @@ button img {
   background-color: grey !important;
 }
 
-.d-none {
-  display: none !important;
-}
+
 
 .show-portable-only {
   display: none !important;
@@ -125,6 +123,10 @@ button img {
 
 .show-desktop-only {
   display: flex !important;
+}
+
+.d-none {
+  display: none !important;
 }
 
 /* //////////////  Instructions     ///////////////// */
@@ -175,6 +177,12 @@ article {
 }
 
 @media only screen and (max-width: 1300px) {
+  .btn-container-top {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
+
   .show-portable-only {
     display: flex !important;
   }
@@ -182,14 +190,13 @@ article {
   .show-desktop-only {
     display: none !important;
   }
-  h1 {
-    display: none;
-  }
+ 
 }
 
 @media only screen and (max-width: 760px) {
-  h1 {
-    display: none;
+  .btn-container-top {
+    top: 0px;
+    right: 0px;
   }
   main,
   canvas {
@@ -216,9 +223,7 @@ article {
   canvas {
     height: 100vh;
   }
-  h1 {
-    display: none;
-  }
+
 
   article {
     position: absolute;
