@@ -14,6 +14,7 @@ function checkInstructionWindow(){
   if(!instructionOpen){
     instructionOpen = true;
     document.getElementById('instructions').classList.add('d-none');
+    document.getElementById('instructions').classList.remove('d-flex');
   }else{
     instructionOpen = false;
     document.getElementById('instructions').classList.remove('d-none');
@@ -117,7 +118,7 @@ window.addEventListener(`keydown`, (e) => {
     keyboard.DOWN = true;
   }
 
-  if (e.keyCode == 40 || e.keyCode == 32) {
+  if (e.keyCode == 32) {
     keyboard.SPACE = true;
   }
   if (e.keyCode == 69) {

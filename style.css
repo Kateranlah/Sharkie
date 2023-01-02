@@ -6,7 +6,8 @@ canvas {
 body {
   margin: 0;
   background: url("img/3. Background/Mesa de trabajo 1.png"), center;
-  min-height: 100vh;
+  background-repeat: no-repeat;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,7 +19,7 @@ h1 {
   font-size: 64px;
   color: rgb(211, 231, 112);
   text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
-  text-align: center;
+  align-self: center;
 }
 
 h2 {
@@ -73,12 +74,15 @@ main {
   top: 0;
   right: 0;
   justify-content: flex-end;
+  margin-bottom: 10px;
+  z-index: 4;
 }
 
 .btn-container-top > button{
   width: 48px;
   height: 48px;
   background-color: rgb(211, 231, 112)
+  
 }
 .btn-container-top > button > img {
   margin-top: 5px;
@@ -94,7 +98,6 @@ button {
   color: white;
   font-size: 20px;
   margin-right: 8px;
-
   font-family: lucky, Arial, Helvetica, sans-serif;
 }
 
@@ -115,8 +118,6 @@ button img {
   background-color: grey !important;
 }
 
-
-
 .show-portable-only {
   display: none !important;
 }
@@ -129,18 +130,21 @@ button img {
   display: none !important;
 }
 
+
+
 /* //////////////  Instructions     ///////////////// */
 
 article {
   text-align: center;
   background-color: rgba(0, 0, 255, 0.15);
   flex-direction: column;
-  /* position: absolute;
+  position: relative;
   top: 0;
   left: 10px;
-  bottom: 0; */
+  bottom: 0;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000 !important;
+  
 }
 
 .container {
@@ -194,6 +198,15 @@ article {
 }
 
 @media only screen and (max-width: 760px) {
+  article {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 255, 0.4);
+    z-index: 3;
+  }
   .btn-container-top {
     top: 0px;
     right: 0px;
@@ -202,20 +215,13 @@ article {
   canvas {
     width: 100%;
   }
-  article {
-    position: absolute;
-    top: 0;
-    left: 10px;
-    bottom: 0;
-  }
+
 
   .show-portable-only {
     display: flex !important;
   }
 
-  .show-desktop-only {
-    display: none !important;
-  }
+
 }
 
 @media only screen and (max-height: 480px) {
@@ -224,18 +230,12 @@ article {
     height: 100vh;
   }
 
-
-  article {
-    position: absolute;
-    top: 0;
-    left: 10px;
-    bottom: 0;
-  }
   .show-portable-only {
     display: flex !important;
   }
 
-  .show-desktop-only {
-    display: none !important;
-  }
+ 
 }
+
+
+
