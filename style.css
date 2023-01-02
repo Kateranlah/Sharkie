@@ -78,16 +78,14 @@ main {
   z-index: 4;
 }
 
-.btn-container-top > button{
+.btn-container-top > button {
   width: 48px;
   height: 48px;
-  background-color: rgb(211, 231, 112)
-  
+  background-color: rgb(211, 231, 112);
 }
 .btn-container-top > button > img {
   margin-top: 5px;
   max-height: 32px;
-
 }
 
 button {
@@ -130,8 +128,6 @@ button img {
   display: none !important;
 }
 
-
-
 /* //////////////  Instructions     ///////////////// */
 
 article {
@@ -144,7 +140,6 @@ article {
   bottom: 0;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000 !important;
-  
 }
 
 .container {
@@ -194,7 +189,6 @@ article {
   .show-desktop-only {
     display: none !important;
   }
- 
 }
 
 @media only screen and (max-width: 760px) {
@@ -216,12 +210,9 @@ article {
     width: 100%;
   }
 
-
   .show-portable-only {
     display: flex !important;
   }
-
-
 }
 
 @media only screen and (max-height: 480px) {
@@ -233,9 +224,4 @@ article {
   .show-portable-only {
     display: flex !important;
   }
-
- 
 }
-
-
-

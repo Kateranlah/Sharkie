@@ -3,7 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let instructionOpen = false
 
-function init() {
+function init(){
   canvas = document.getElementById("canvas");
   initLevel();
   world = new World(canvas, keyboard);
@@ -14,17 +14,30 @@ function checkInstructionWindow(){
   if(!instructionOpen){
     instructionOpen = true;
     document.getElementById('instructions').classList.add('d-none');
-    document.getElementById('instructions').classList.remove('d-flex');
   }else{
     instructionOpen = false;
     document.getElementById('instructions').classList.remove('d-none');
   }
 }
 
+function restartGame(){
+  clearAllIntervals();
+  init();
+}
+
+function clearAllIntervals(){
+  for (let i = 1; i < 9999; i++) window.clearInterval(i);
+}
+
 function btnEvents() {
   document.getElementById("btn-instructions").addEventListener("touchstart", (e) => {
     e.preventDefault();
     checkInstructionWindow();
+  });
+
+  document.getElementById("btn-restart").addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    restartGame();
   });
 
   document.getElementById("btn-right").addEventListener("touchstart", (e) => {
