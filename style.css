@@ -101,7 +101,7 @@ button img {
   display: none !important;
 }
 
-.show-mobile-only {
+.show-portable-only {
   display: none !important;
 }
 
@@ -114,6 +114,7 @@ button img {
 article {
   text-align: center;
   background-color: rgba(0, 0, 255, 0.15);
+  flex-direction: column;
   /* position: absolute;
   top: 0;
   left: 10px;
@@ -155,6 +156,18 @@ position: absolute;
   src: url("img/5.Font/luckiestGuy-regular.ttf");
 }
 
+@media only screen and (max-width: 1300px) {
+  .show-portable-only {
+    display: flex !important;
+  }
+
+  .show-desktop-only {
+    display: none !important;
+  }
+
+}
+
+
 @media only screen and (max-width: 760px) {
   main,
   canvas {
@@ -169,7 +182,7 @@ position: absolute;
 
   }
 
-  .show-mobile-only {
+  .show-portable-only {
     display: flex !important;
   }
 
@@ -194,7 +207,7 @@ position: absolute;
     bottom: 0;
  
   }
-  .show-mobile-only {
+  .show-portable-only {
     display: flex !important;
   }
 
