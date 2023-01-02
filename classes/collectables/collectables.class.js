@@ -9,6 +9,9 @@ class Collectables extends MovableObject {
     height: 0,
   };
 
+  coin_sound = new Audio('audio/coin.mp3');
+  poisen_sound = new Audio('audio/poisen.mp3');
+
   constructor() {
     super();
   }
@@ -25,6 +28,7 @@ class Collectables extends MovableObject {
       if (element instanceof Coin && element == item) {
         this.remove(i);
         this.increaseOwnCoins();
+        this.coin_sound.play();
         if (this.collectedAllCoins()) {
           this.changeHealthbarColor();
         }
@@ -36,6 +40,7 @@ class Collectables extends MovableObject {
       } else if (element instanceof Poisen && element == item) {
         this.remove(i);
         this.increaseOwnPoisen();
+        this.poisen_sound.play();
         i++;
       } else {
         i++;

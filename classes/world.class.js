@@ -14,6 +14,8 @@ class World {
   won = new Won();
   lost = new Lost();
   outcome;
+  win_sound = new Audio('audio/win.mp3');
+  lose_sound = new Audio('audio/lose.mp3');
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -201,14 +203,21 @@ class World {
   checkGameOver() {
     if (this.endbossDead()) {
       this.gameOver("win");
+      this.win_sound.play();
     }
     if (this.playerDead()) {
       this.gameOver("lose");
+      setTimeout(() => {
+        this.lose_sound.play();
+      }, 2000);
+     
     }
   }
 
   gameOver(outcome) {
+   
     this.outcome = outcome;
+   
     setTimeout(() => {
       this.clearAllIntervals();
       this.drawEndscreen();

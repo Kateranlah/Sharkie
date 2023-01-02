@@ -24,6 +24,16 @@ class Character extends MovableObject {
     height: -150,
   };
 
+  swimming_sound = new Audio('audio/swim.mp3');
+  slap_sound = new Audio('audio/splash.mp3');
+  blow_sound = new Audio('audio/blowB2.mp3');
+  breath_sound = new Audio('audio/breath.mp3');
+  sleep_sound = new Audio('audio/snore.mp3');
+  hurt_sound = new Audio('audio/hurt.mp3');
+  electric_sound = new Audio('audio/electric.mp3');
+ 
+ 
+
   IMAGES_LONG_IDLE = [
     "img/1.Sharkie/2.Long_IDLE/i1.png",
     "img/1.Sharkie/2.Long_IDLE/i2.png",
@@ -172,6 +182,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_BUBBLE_MISSING);
     this.loadImages(this.IMAGES_HURT_SHOCK);
     this.loadImages(this.IMAGES_DIE_SHOCK);
+    this.swimming_sound.volume = 0.2;
 
     this.animate();
   }
@@ -200,6 +211,7 @@ class Character extends MovableObject {
     if (!this.madeRecentBubble && !this.isHurt()) {
       let bubble = new StandartBubble();
       this.world.creatBubble(bubble);
+      this.blow_sound.play();
     }
   }
 
@@ -209,6 +221,7 @@ class Character extends MovableObject {
         let bubble = new PoisenBubble();
         this.world.creatBubble(bubble);
         this.poisenCollected--;
+        this.blow_sound.play();
         world.poisenBar.setPercentage(
           world.character.poisenCollected,
           "poisen"
@@ -249,17 +262,22 @@ class Character extends MovableObject {
   // DO SWIMM MOVEMENTS //
 
   movements() {
+    this.swimming_sound.pause();
     if (this.world.keyboard.UP && this.topIsFree()) {
       this.moveUp();
+      
+      
     }
     if (this.world.keyboard.DOWN && this.bottomIsFree()) {
       this.moveDown();
     }
     if (this.world.keyboard.RIGHT && this.rightIsFree()) {
       this.moveRight();
+      
     }
     if (this.world.keyboard.LEFT && this.leftIsFree()) {
       this.moveLeft();
+      
     }
   }
 
@@ -302,15 +320,18 @@ class Character extends MovableObject {
   attacks() {
     if (this.world.keyboard.SPACE) {
       this.slap();
+      this.slap_sound.play();
       this.setLastMove();
     }
     if (this.world.keyboard.E && !this.isHurt()) {
       setTimeout(() => this.blowBubble(), 900);
       this.setLastMove();
+      this.breath_sound.play();
     }
     if (this.world.keyboard.R && !this.isHurt()) {
       setTimeout(() => this.blowPoisenBubble(), 900);
       this.setLastMove();
+      this.breath_sound.play();
     }
   }
 
@@ -323,8 +344,10 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_DIE_SHOCK, this.playOnes);
     } else if (this.getsAttacked()) {
       this.playAnimation(this.IMAGES_HURT_POISEN);
+      this.hurt_sound.play();
     } else if (this.getsShocked()) {
       this.playAnimation(this.IMAGES_HURT_SHOCK);
+      this.electric_sound.play();
     } else if (this.slapping && !this.isDead()) {
       this.playAnimation(this.IMAGES_SLAP, this.playOnes);
     } else if (this.isMakingBubble()) {
@@ -338,6 +361,7 @@ class Character extends MovableObject {
     } else if (this.isSwimming()) {
       this.playAnimation(this.IMAGES_SWIM);
     } else if (this.isSleeping()) {
+      this.sleep_sound.play();
       this.playAnimation(this.IMAGES_SLEEP);
     } else if (this.isSpleepy()) {
       this.fallAsleep();
