@@ -18,13 +18,7 @@ class DrawableObject {
   }
 
   draw(ctx) {
-    try {
   ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    } catch (error) {
-      console.log(this);
-      console.log(error);
-    }
-    
   }
 
   loadImages(arr) {
@@ -35,20 +29,20 @@ class DrawableObject {
     });
   }
 
-  drawHitbox(ctx) {
-    if (this.isEnemy()) {
-      ctx.beginPath();
-      ctx.lineWidth = "3";
-      ctx.strokeStyle = "blue";
-      ctx.rect(
-        this.x + this.offset.x,
-        this.y + this.offset.y,
-        this.width + this.offset.width,
-        this.height + this.offset.height
-      );
-      ctx.stroke();
-    }
-  }
+  // drawHitbox(ctx) {
+  //   if (this.isEnemy()) {
+  //     ctx.beginPath();
+  //     ctx.lineWidth = "3";
+  //     ctx.strokeStyle = "blue";
+  //     ctx.rect(
+  //       this.x + this.offset.x,
+  //       this.y + this.offset.y,
+  //       this.width + this.offset.width,
+  //       this.height + this.offset.height
+  //     );
+  //     ctx.stroke();
+  //   }
+  // }
 
   isEnemy() {
     return (
