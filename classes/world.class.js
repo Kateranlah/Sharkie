@@ -57,7 +57,6 @@ class World {
 
   checkFreeWay() {
     this.level.barriers.forEach((barrier) => {
-      console.log(this.character.isColliding(barrier), barrier);
       if (this.character.isColliding(barrier)) {
         if (this.keyboard.UP && !this.character.barrierBlockDown) {
           this.character.moveDown();
