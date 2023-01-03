@@ -5,9 +5,14 @@ let instructionOpen = false
 
 function init(){
   canvas = document.getElementById("canvas");
+  canvas.getContext("2d");
+  btnEvents();
+}
+
+function startGame(){
   initLevel();
   world = new World(canvas, keyboard);
-  btnEvents();
+  document.getElementById('btn-start').classList.add('d-none');
 }
 
 function checkInstructionWindow(){
@@ -52,7 +57,7 @@ function mute(){
 
 function restartGame(){
   clearAllIntervals();
-  init();
+  startGame();
 }
 
 function clearAllIntervals(){

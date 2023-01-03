@@ -1,11 +1,11 @@
 canvas {
-  background-color: black;
+  background-color: #36B8D4;
   display: block;
 }
 
 body {
   margin: 0;
-  background: url("img/3. Background/Mesa de trabajo 1.png"), center;
+  background: #36B8D4 url("img/3. Background/Mesa de trabajo 1.png") center;
   background-repeat: no-repeat;
   min-height: 75vh;
   display: flex;
@@ -86,6 +86,12 @@ main {
 .btn-container-top > button > img {
   margin-top: 5px;
   max-height: 32px;
+}
+
+#btn-start {
+ align-self: center;
+ width: 40%;
+ background-color: unset;
 }
 
 button {
@@ -189,10 +195,13 @@ article {
   .show-desktop-only {
     display: none !important;
   }
-}
 
-@media only screen and (max-width: 760px) {
-  article {
+  #btn-start {
+    position: absolute;
+    top: 150px;
+   }
+
+   article {
     position: absolute;
     top: 0;
     left: 0;
@@ -201,6 +210,10 @@ article {
     background-color: rgba(0, 0, 255, 0.4);
     z-index: 3;
   }
+}
+
+@media only screen and (max-width: 760px) {
+
   .btn-container-top {
     top: 0px;
     right: 0px;
