@@ -1,11 +1,11 @@
 canvas {
-  background-color: #36B8D4;
+  background-color: #36b8d4;
   display: block;
 }
 
 body {
   margin: 0;
-  background: #36B8D4 url("img/3. Background/Mesa de trabajo 1.png") center;
+  background: #36b8d4 url("img/3. Background/Mesa de trabajo 1.png") center;
   background-repeat: no-repeat;
   min-height: 75vh;
   display: flex;
@@ -89,9 +89,9 @@ main {
 }
 
 #btn-start {
- align-self: center;
- width: 40%;
- background-color: unset;
+  align-self: center;
+  width: 40%;
+  background-color: unset;
 }
 
 button {
@@ -176,6 +176,10 @@ article {
   position: absolute;
 }
 
+.hideLandscape {
+  display: none;
+}
+
 @font-face {
   font-family: "lucky";
   src: url("img/5.Font/luckiestGuy-regular.ttf");
@@ -199,9 +203,9 @@ article {
   #btn-start {
     position: absolute;
     top: 150px;
-   }
+  }
 
-   article {
+  article {
     position: absolute;
     top: 0;
     left: 0;
@@ -213,7 +217,6 @@ article {
 }
 
 @media only screen and (max-width: 760px) {
-
   .btn-container-top {
     top: 0px;
     right: 0px;
@@ -236,5 +239,38 @@ article {
 
   .show-portable-only {
     display: flex !important;
+  }
+}
+
+@media (orientation: portrait) {
+  body {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  main {
+    display: none;
+  }
+
+  #popUp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    z-index: 10;
+    background-color: #2c96ae;
+    width: 100vw;
+  }
+
+  h2 {
+    align-self: center;
+  }
+
+  p {
+    color: rgb(211, 231, 112);
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+      1px 1px 0 #000 !important;
+    margin-inline: 20px;
   }
 }
