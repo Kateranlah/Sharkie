@@ -57,18 +57,19 @@ class World {
 
   checkFreeWay() {
     this.level.barriers.forEach((barrier) => {
+      console.log(this.character.isColliding(barrier), barrier);
       if (this.character.isColliding(barrier)) {
         if (this.keyboard.UP && !this.character.barrierBlockDown) {
-          this.character.barrierBlockUp = true;
+          this.character.moveDown();
         }
         if (this.keyboard.LEFT && !this.character.barrierBlockRight) {
-          this.character.barrierBlockLeft = true;
+          this.character.moveRight();
         }
         if (this.keyboard.DOWN && !this.character.barrierBlockUp) {
-          this.character.barrierBlockDown = true;
+          this.character.moveUp();
         }
         if (this.keyboard.RIGHT && !this.character.barrierBlockLeft) {
-          this.character.barrierBlockRight = true;
+          this.character.moveLeft();
         }
       }
     });

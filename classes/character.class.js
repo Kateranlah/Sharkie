@@ -265,19 +265,15 @@ class Character extends MovableObject {
     this.swimming_sound.pause();
     if (this.world.keyboard.UP && this.topIsFree()) {
       this.moveUp();
-      
-      
     }
     if (this.world.keyboard.DOWN && this.bottomIsFree()) {
       this.moveDown();
     }
     if (this.world.keyboard.RIGHT && this.rightIsFree()) {
       this.moveRight();
-      
     }
     if (this.world.keyboard.LEFT && this.leftIsFree()) {
       this.moveLeft();
-      
     }
   }
 
