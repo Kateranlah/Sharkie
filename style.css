@@ -193,7 +193,7 @@ article {
   }
 
   .show-portable-only {
-    display: flex !important;
+    display: none !important;
   }
 
   .show-desktop-only {

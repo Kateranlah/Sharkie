@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let instructionOpen = false
+let instructionOpen = true
 
 function init(){
   canvas = document.getElementById("canvas");
