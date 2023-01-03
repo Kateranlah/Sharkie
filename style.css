@@ -140,7 +140,7 @@ article {
   text-align: center;
   background-color: rgba(0, 0, 255, 0.15);
   flex-direction: column;
-  position: relative;
+  position: absolute;
   top: 0;
   left: 10px;
   bottom: 0;
