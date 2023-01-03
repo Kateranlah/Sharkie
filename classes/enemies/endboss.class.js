@@ -1,6 +1,6 @@
 class Endboss extends MovableObject {
-  height = 250;
-  width = 600;
+  height = 350;
+  width = 650;
   speed = 12;
   firstAppearance = 0;
   dieing = 0;
@@ -70,7 +70,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
     this.x = 2200;
-    this.y = 0;
+    this.y = -80;
     this.energy = 100;
     this.otherDirection = true;
 
@@ -109,7 +109,7 @@ class Endboss extends MovableObject {
   }
 
   attackMovement() {
-    if (this.y < 110) {
+    if (this.y < 40) {
       this.moveDown();
     }
     if (this.x > 1200) {
