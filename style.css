@@ -90,7 +90,7 @@ main {
 
 #btn-start {
   align-self: center;
-  width: 40%;
+  width: 100%;
   background-color: unset;
 }
 
@@ -103,6 +103,7 @@ button {
   font-size: 20px;
   margin-right: 8px;
   font-family: lucky, Arial, Helvetica, sans-serif;
+  cursor: pointer;
 }
 
 button img {
@@ -226,6 +227,9 @@ article {
     width: 100%;
   }
 
+  #btn-start {
+    width: 40%;
+  }
   .show-portable-only {
     display: flex !important;
   }

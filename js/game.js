@@ -10,9 +10,18 @@ function init(){
 }
 
 function startGame(){
+  document.getElementById('btn-start').classList.add('d-none');
+  document.getElementById('btn-top').classList.remove('d-none');
+  document.getElementById('canvas').classList.remove('d-none');
+setTimeout(() => {
   initLevel();
   world = new World(canvas, keyboard);
-  document.getElementById('btn-start').classList.add('d-none');
+}, 250);
+
+ 
+
+ 
+
 }
 
 function checkInstructionWindow(){
